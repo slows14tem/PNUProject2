@@ -4,7 +4,7 @@ import { AppContext } from "./View1Main";
 import { getSelectList } from "../../API/funcAPI";
 
 function SelectBox() {
-  const [datas, setdata] = useState();
+  const [datas, setdatas] = useState();
   const [data1, setdata1] = useState();
   const [data2, setdata2] = useState();
   const [data3, setdata3] = useState();
@@ -13,22 +13,20 @@ function SelectBox() {
   const [part1, setPart1] = useState();
   const [lead, setLead] = useContext(AppContext);
 
-  useEffect(() => {
-    getSelectlist();
-  }, []);
-
   //콤보박스에 넣을 리스트 만들기 위해 data call
-  const getSelectlist = async () => {
+  useEffect(() => {
     (async () => {
       await getSelectList()
         .then((res) => {
           //모든 데이터를 data에 넣기
-          setdata(res);
+          setdatas(res);
           //machinery만 date1에 넣기
           setdata1(res.map((item) => item.machinery));
         })
     })();
-  };
+  }, []);
+
+  
 
   //selectbox를 id별로 변수화
   let target = document.getElementById("choice"); //select box 1번

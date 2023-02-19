@@ -13,6 +13,41 @@ export const getSelectList = async () => {
   }
 }
 
+export const getSearchResults = async (requestBody) => {
+  try {
+    const { data } = await defaultInstance.post(
+        "search",
+        requestBody
+      )
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const addBasket = async (requestBody) => {
+  try {
+    const { data } = await defaultInstance.post(
+        "basket",
+        requestBody
+      )
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getBasket = async () => {
+  try{
+    const {data}  = await defaultInstance.get(
+      'getbasket',
+    )
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // post method example
 // export const addLog = async (logInfo) => {
 //   try {
