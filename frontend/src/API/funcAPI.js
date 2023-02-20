@@ -1,6 +1,19 @@
-import { defaultInstance } from './indexAPI'
+import { defaultInstance, authInstance } from './indexAPI'
 
 //생성된 axios인스턴스를 사용해 API호출
+
+//login
+export const login = async (requestBody) => {
+  try {
+    const { data } = await defaultInstance.post(
+        "/auth/login",
+        requestBody
+      )
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export const getSelectList = async () => {
   try{
