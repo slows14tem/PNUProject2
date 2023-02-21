@@ -1,16 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AppContext } from "./View1Main";
 import { Link } from "react-router-dom";
 import { getSearchResults, addBasket } from "../../API/funcAPI";
 
+//리스트 출력, 과거데이터 출력, 장바구니 저장
+
 function SelectedList() {
 
-  const [data, setData] = useState(); //동신 데이터 저장
+  const [data, setData] = useState(); //통신 데이터 저장
   const [checkItems, setCheckItems] = useState([]); //체크한 아이템 저장
   const [lead, setLead] = useContext(AppContext);
 
-  //검색어가 포함된 리스트 불러오기
+  //검색조건이 포함된 리스트 호출
   useEffect(() => {
+    //context값(lead)가 빈값이 아닐때 통신 호출
     if (lead[0] !== '') {
       (async () => {
         await getSearchResults(lead)
@@ -33,6 +36,7 @@ function SelectedList() {
     }
   };
 
+  //전체 선택
   const handleAllCheck = (checked) => {
     if (checked) {
       // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
@@ -93,6 +97,7 @@ function SelectedList() {
               <td><input type={'checkbox'} onChange={(e) => handleSingleCheck(e.target.checked, item.id)}
                 checked={checkItems.includes(item.id) ? true : false}></input></td>
               {/* 클릭하면 과거 데이터로 이동(뒤로가기하면 view1이 리셋되는 현상 해결해야함) */}
+              {/* 한 행 전체를 link로 걸면 체크박스를 클릭해도 과거데이터로 이동해버림 */}
               <td><Link to='/view2' state={item}>{item.machinery}</Link></td>
               <td>{item.items}</td>
               <td>{item.part1}</td>

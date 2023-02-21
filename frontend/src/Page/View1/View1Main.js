@@ -12,7 +12,7 @@ function View1Main() {
   const [lead, setLead] = useState();
   const [visible, setVisible] = useState(false);
 
-  //selectbox에서 선택한 값이 있을때만 리스트를 보여주기 위한 변수 visible
+  //selectbox에서 선택한 값이 있을때만 리스트(SelectedList)를 보여주기 위한 변수 visible
   useEffect(() => {
     if (lead === undefined) {
       setVisible(false)

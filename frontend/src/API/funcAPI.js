@@ -17,7 +17,7 @@ export const login = async (requestBody) => {
 
 export const getSelectList = async () => {
   try{
-    const {data}  = await defaultInstance.get(
+    const {data}  = await authInstance.get(
       'get',
     )
     return data
@@ -28,7 +28,7 @@ export const getSelectList = async () => {
 
 export const getSearchResults = async (requestBody) => {
   try {
-    const { data } = await defaultInstance.post(
+    const { data } = await authInstance.post(
         "search",
         requestBody
       )
@@ -40,7 +40,7 @@ export const getSearchResults = async (requestBody) => {
 
 export const addBasket = async (requestBody) => {
   try {
-    const { data } = await defaultInstance.post(
+    const { data } = await authInstance.post(
         "basket",
         requestBody
       )
@@ -52,7 +52,7 @@ export const addBasket = async (requestBody) => {
 
 export const getBasket = async () => {
   try{
-    const {data}  = await defaultInstance.get(
+    const {data}  = await authInstance.get(
       'getbasket',
     )
     return data

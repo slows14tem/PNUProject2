@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "./View1Main";
 import { getSelectList } from "../../API/funcAPI";
 
+//검색 및 검색어 자동완성 기능
+
 function Search(){
 
   const [datas, setdatas] = useState();
@@ -11,6 +13,7 @@ function Search(){
   const [searchResults, setSearchResults] = useState([]);
   const [lead, setLead] = useContext(AppContext);
 
+  //페이지가 렌더링 되면 자동완성 리스트에 출력될 데이터 호출
   useEffect(() => {
     (async () => {
       await getSelectList()
@@ -43,7 +46,6 @@ function Search(){
 
   //  options라는 배열에 중복제거한 값 저장
   let options = [];
-
   for (let item in data) {
     options.push(data[item]);
   }
@@ -71,11 +73,13 @@ function Search(){
     );
   };
 
+  //검색된 정보(검색조건, 검색어)를 상위 컴포넌트로 올리기 위한 로직
   useEffect(()=>{
     const output = [];
-    output.push(selected)
-    output.push(selectedOption);
-    setLead(output);
+    output.push(selected); //검색조건
+    output.push(selectedOption);  //검색어
+    setLead(output);  //useContext에 넣기
+    // setLead2(datas)
   },[searchResults])
 
   return(
@@ -89,7 +93,7 @@ function Search(){
             ))}
           </select>
           <form onSubmit={searchData}>
-            {/* 입력시 대소문자 구분 필요 */}
+            {/* 입력시 대소문자 구분 필요 - 필요 없이 만들어야 할까? */}
             <input
               list="options"
               value={selectedOption}
