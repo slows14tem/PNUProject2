@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react";
-import { getBasket } from "../../API/funcAPI";
+import { useDispatch, useSelector } from 'react-redux';
+import { getBasketListRD } from "../../Component/Store/Store";
 
 function BasketList() {
+
+  let dispatch = useDispatch();
+  let { Basket } = useSelector((state) => { return state })  
   const [data, setData] = useState();
   const [category, setCategory] = useState();
   const [checkItems, setCheckItems] = useState([]);
 
+  //main에서 통신 호출된 장바구니를 state에 담기
   useEffect(() => {
-    (async () => {
-      await getBasket()
-        .then((res) => {
-          //장바구니 데이터를 datas에 넣기(sort해서 넣기)
-          // setdatas(res.sort((a, b) => a.key2 < b.key2 ? -1 : 1));
-          setData(res);
-          setCategory(res.map((item) => item.key2));
-        })
-    })();
-  }, [])
+    setData(Basket);
+    setCategory(Basket.map((item) => item.key2));
+  }, [Basket])
 
+  useEffect(()=>{
+    dispatch(getBasketListRD(checkItems));
+  },[checkItems])
+
+  //통신한 데이터를 key2별로 sort
   const key2 = [...new Set(category)];
   key2.sort()
 
@@ -90,7 +93,10 @@ function BasketList() {
             </tbody>
           </table>
           <div>
-            {kitem}
+            {/* 각 카테고리별 리드타임중 큰값 출력 */}
+            {kitem} 
+            총 {(data.filter((item) => kitem.includes(item.key2))).length}개
+            소요 예상일: {Math.max(...data.filter((item) => kitem.includes(item.key2)).map((i)=>i.leadtime))}(일)
           </div>
         </div>
       )}

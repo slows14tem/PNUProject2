@@ -12,7 +12,7 @@ const axiosAuthAPI = (url, options) => {
   const token = localStorage.getItem('wtw-token') || ''
   const instance = axios.create({
     baseURL: url,
-    headers:  { Authorization: "Bearer" + token },
+    headers:  { Authorization: "Bearer " + token },
     ...options,
   })
   return instance

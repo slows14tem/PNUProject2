@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 public class Basket {
 	
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long seq;
+	private int id;
 	private String key2;
 	private String machinery;
 	private String items;

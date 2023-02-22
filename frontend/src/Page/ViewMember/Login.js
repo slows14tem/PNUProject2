@@ -28,6 +28,7 @@ function Login(){
         .then((res) => {
           if (res?.accessToken) {
           localStorage.setItem('wtw-token', res?.accessToken);
+          console.log(res)
           } else {
             console.log("login false")
           }

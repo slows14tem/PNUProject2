@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getSearchResults, addBasket } from "../../API/funcAPI";
 
 //리스트 출력, 과거데이터 출력, 장바구니 저장
+//페이징 기능 필요
 
 function SelectedList() {
 
@@ -11,7 +12,7 @@ function SelectedList() {
   const [checkItems, setCheckItems] = useState([]); //체크한 아이템 저장
   const [lead, setLead] = useContext(AppContext);
 
-  //검색조건이 포함된 리스트 호출
+  //검색조건이 포함된 리스트 호출(통신 호출할지 redux로 필터링 할지 결정못함)
   useEffect(() => {
     //context값(lead)가 빈값이 아닐때 통신 호출
     if (lead[0] !== '') {
