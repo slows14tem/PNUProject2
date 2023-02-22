@@ -39,4 +39,9 @@ public class DataController {
 		return dataService.getBasket();
 	}
 	//회원가입을 한다면 회원정보가 파라미터로 들어가야됨
+	
+	@PostMapping("/data/delbasket")
+	public void delBasket(@RequestBody int[] idNum) {
+		dataService.delBasket(idNum);
+	}
 }

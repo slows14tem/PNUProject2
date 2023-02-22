@@ -2,6 +2,8 @@ package com.project.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,13 @@ public class DataServiceImpl implements DataService{
 		return basketRepo.findAll();
 		//로그인 구현되면 쿼리메소드 findByUsernameOrderByCategory 정도 하면 될듯
 		//또는 리액트에서 sort 구현 가능
+	}
+	
+	@Transactional
+	public void delBasket(int[] idNum) {
+		for (int e: idNum) {
+			basketRepo.deleteById(e);
+		}	
 	}
 
 }

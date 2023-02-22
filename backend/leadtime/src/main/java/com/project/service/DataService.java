@@ -14,6 +14,8 @@ public interface DataService {
 	public void addBasket(Basket[] basket);
 
 	public List<Basket> getBasket();
+
+	public void delBasket(int[] idNum);
 	
 	
 

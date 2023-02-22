@@ -2,7 +2,7 @@ import { defaultInstance, authInstance } from './indexAPI'
 
 //생성된 axios인스턴스를 사용해 API호출
 
-//login
+//login - return yes(리덕스 저장 필요없음)
 export const login = async (requestBody) => {
   try {
     const { data } = await defaultInstance.post(
@@ -15,17 +15,19 @@ export const login = async (requestBody) => {
   }
 }
 
-export const getSelectList = async () => {
-  try{
-    const {data}  = await authInstance.get(
-      'get',
-    )
-    return data
-  } catch (error) {
-    console.log(error)
-  }
-}
+//login - return yes(redux로 대체)
+// export const getSelectListAx = async () => {
+//   try{
+//     const {data}  = await authInstance.get(
+//       'get',
+//     )
+//     return data
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
+//login - return yes(입력마다 출력이 달라지기 때문에 리덕스 저장 불가)
 export const getSearchResults = async (requestBody) => {
   try {
     const { data } = await authInstance.post(
@@ -38,6 +40,7 @@ export const getSearchResults = async (requestBody) => {
   }
 }
 
+//login - return no
 export const addBasket = async (requestBody) => {
   try {
     const { data } = await authInstance.post(
@@ -50,10 +53,24 @@ export const addBasket = async (requestBody) => {
   }
 }
 
+//login - return yes(일단 장바구니 전체 호출)
 export const getBasket = async () => {
   try{
     const {data}  = await authInstance.get(
       'getbasket',
+    )
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//Basket 삭제 - return no
+export const delBasket = async (requestBody) => {
+  try{
+    const {data}  = await authInstance.post(
+      'delbasket',
+      requestBody
     )
     return data
   } catch (error) {

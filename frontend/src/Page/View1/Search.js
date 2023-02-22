@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useSelector } from 'react-redux';
 import { AppContext } from "./View1Main";
-import { getSelectList } from "../../API/funcAPI";
 
 //검색 및 검색어 자동완성 기능
 
 function Search(){
 
-  const [datas, setdatas] = useState();
+  let { SelectList } = useSelector((state) => { return state })
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -14,15 +14,15 @@ function Search(){
   const [lead, setLead] = useContext(AppContext);
 
   //페이지가 렌더링 되면 자동완성 리스트에 출력될 데이터 호출
-  useEffect(() => {
-    (async () => {
-      await getSelectList()
-        .then((res) => {
-          //모든 데이터를 datas에 넣기
-          setdatas(res);
-        })
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     await getSelectList()
+  //       .then((res) => {
+  //         //모든 데이터를 datas에 넣기
+  //         setdatas(res);
+  //       })
+  //   })();
+  // }, []);
 
   //검색조건 리스트
   const selectList = ["===검색항목선택===", "발주처", "부품대분류", "부품명", "부품번호"];
@@ -31,16 +31,15 @@ function Search(){
   const handleSelect = (e) => {
     //선택한 조건 저장
     setSelected(e.target.value);
-
     //조건 선택하면 자동완성목록 띄우기 위한 데이터 정제(선택된 필드 추출 및 중복제거)
     if (e.target.value === "발주처") {
-      setData([...new Set(datas.map((item) => item.baljucheo))]);
+      setData([...new Set(SelectList.map((item) => item.baljucheo))]);
     } else if (e.target.value === "부품대분류") {
-      setData([...new Set(datas.map((item) => item.machinery))]);
+      setData([...new Set(SelectList.map((item) => item.machinery))]);
     } else if (e.target.value === "부품명") {
-      setData([...new Set(datas.map((item) => item.items))]);
+      setData([...new Set(SelectList.map((item) => item.items))]);
     } else {
-      setData([...new Set(datas.map((item) => item.part1))]);
+      setData([...new Set(SelectList.map((item) => item.part1))]);
     }
   };
 

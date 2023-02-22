@@ -1,42 +1,39 @@
 import { useLocation } from "react-router-dom";
-import React, { useState, useEffect, useContext } from "react";
-import { getSelectList } from "../../API/funcAPI";
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
+import Graph from "./Graph";
 
 //과거 데이터 출력 페이지
-//과거데이터, 
+//추천 목록 출력
 
 function View2Main() {
 
   const location = useLocation();
+  let { SelectList } = useSelector((state) => { return state })
   const [data, setData] = useState(location.state);
-  const [datas, setdatas] = useState();
+  const [oldList, setOldList] = useState(null);
 
   useEffect(()=>{
-    (async () => {
-      await getSelectList()
-        .then((res) => {
-          let items = [];
-          setdatas(res.map((item)=>{
-            if(item.items === data.items){
-              items.push(item);
-              console.log("items", item);
-            }
-          }));
-        });
-    })();
+    const oldData = [];
+    SelectList.map((item)=>{
+    if(item.machinery === data.machinery && item.items === data.items && item.part1 === data.part1){
+      oldData.push({
+        "x": item.leadtime, 
+        "y": item.balju
+      })
+    }});
+    setOldList(oldData);
+    
   },[])
 
-  // useEffect(()=>{
-  //   setdatas(datas?.filter((item)=>item.includes(data.items)))
-  // },[datas])
   
 
   return (
     <>
       <div>
-        {data.machinery} > {data.items} > {data.part1} 상품의 최근 리드타임 내역
-        {console.log(data)}
-        {/* {console.log(datas)} */}
+        {data.machinery} / {data.items} / {data.part1} 상품의 최근 리드타임 내역
+        <Graph props={oldList} />
+        {/* 해당 상품의 관련 상품 추천 추가 */}
       </div>
 
     </>
