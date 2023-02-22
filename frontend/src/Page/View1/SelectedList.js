@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "./View1Main";
 import { Link } from "react-router-dom";
 import { getSearchResults, addBasket } from "../../API/funcAPI";
+import { Paging } from "../../Component/Paging/Paging";
 
 //리스트 출력, 과거데이터 출력, 장바구니 저장
 //페이징 기능 필요
@@ -70,6 +71,25 @@ function SelectedList() {
     })();
   }
 
+  //pagination 적용 (react-js-pagination)
+  const [count, setCount] = useState(0); //아이템 총 개수
+  const [currentpage, setCurrentpage] = useState(1); //현재페이지
+  const [postPerPage] = useState(10); //페이지당 아이템 개수
+  const [indexOfLastPost, setIndexOfLastPost] = useState(0);
+  const [indexOfFirstPost, setIndexOfFirstPost] = useState(0);
+  const [currentPosts, setCurrentPosts] = useState(0);
+
+  useEffect(() => {
+    setCount(data?.length);
+    setIndexOfLastPost(currentpage * postPerPage);
+    setIndexOfFirstPost(indexOfLastPost - postPerPage);
+    setCurrentPosts(data?.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentpage, indexOfFirstPost, indexOfLastPost, data, postPerPage]);
+
+  const setPage = (e) => {
+    setCurrentpage(e);
+  };
+
   return (
     <>
       <table>
@@ -89,7 +109,7 @@ function SelectedList() {
           </tr>
         </thead>
         <tbody>
-          {data?.map((item, index) => (
+          {currentPosts && data.length > 0 ? currentPosts.map((item, index) => (
           //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
             //클릭하면 테이블에서 삭제하는 코드(현재 안씀)
             // <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
@@ -108,9 +128,11 @@ function SelectedList() {
               <td>{item.gyeonjeokhwapye}</td>
               <td>{item.gyeonjeokdanga}</td>
             </tr>
-          ))}
+          ))
+        : <></>}        
         </tbody>
       </table>
+      <Paging page={currentpage} count={count} setPage={setPage} />
       {checkItems.length > 0 && <button onClick={removeRow}>선택 삭제</button>}
       {checkItems.length > 0 && <button onClick={addItemBasket}>선택 저장</button>}
     </>
