@@ -36,10 +36,12 @@ const axiosAuthAPI = (url, options) => {
           const { data } = await axios({
             method: 'post',
             url: "http://localhost:8080/data/auth/reissue",
-            data: { accessToken, refreshToken },
+            data: { "accessToken": accessToken, "refreshToken": refreshToken },
           });
-          const newAccessToken = data.data.accessToken;
-          const newRefreshToken = data.data.refreshToken;
+          console.log(data)
+          const newAccessToken = data.accessToken;
+          const newRefreshToken = data.refreshToken;
+          
           originalRequest.headers = {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + newAccessToken,

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { getSelectListRD } from "../../Component/Store/Store";
-import SelectBox from "./SelectBox";
 import Search from "./Search";
 import SelectedList from "./SelectedList";
 
@@ -14,7 +12,6 @@ function View1Main() {
 
   //뒤로 갔을 떄 값 저장을 위해서 redux 사용
   let { SearchInfo } = useSelector((state) => { return state })
-  const [lead, setLead] = useState();
   const [visible, setVisible] = useState(false);
 
   //selectbox에서 선택한 값이 있을때만 리스트(SelectedList)를 보여주기 위한 변수 visible
@@ -32,10 +29,11 @@ function View1Main() {
 
   return (
     <>
-      {/* <SelectBox /> */}
-      <Search />
-      {visible && <SelectedList />}
-      <button><Link to='/view3'>장바구니 이동</Link></button>
+      <div className="view1Main">
+        <Search />
+        {visible && <SelectedList />}
+        <button><Link to='/view3'>장바구니 이동</Link></button>
+      </div>
     </>
   );
 }

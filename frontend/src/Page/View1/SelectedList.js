@@ -93,46 +93,49 @@ function SelectedList() {
 
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            {/* 체크박스 전체 클릭 */}
-            <th><input type={'checkbox'} onChange={(e) => handleAllCheck(e.target.checked)}
-              checked={checkItems?.length === data?.length ? true : false}></input></th>
-            <th>Machinery</th>
-            <th>청구품목</th>
-            <th>Part.No</th>
-            <th>카테고리</th>
-            <th>발주처</th>
-            <th>리드타임(일)</th>
-            <th>견적화폐</th>
-            <th>견적단가</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentPosts && data.length > 0 ? currentPosts.map((item, index) => (
-          //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
-            //클릭하면 테이블에서 삭제하는 코드(현재 안씀)
-            // <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
-            <tr key={index} >
-              {/* 체크박스 클릭 */}
-              <td><input type={'checkbox'} onChange={(e) => handleSingleCheck(e.target.checked, item.id)}
-                checked={checkItems.includes(item.id) ? true : false}></input></td>
-              {/* 클릭하면 과거 데이터로 이동(뒤로가기하면 view1이 리셋되는 현상 해결해야함) */}
-              {/* 한 행 전체를 link로 걸면 체크박스를 클릭해도 과거데이터로 이동해버림 */}
-              <td><Link to='/view2' state={item}>{item.machinery}</Link></td>
-              <td>{item.items}</td>
-              <td>{item.part1}</td>
-              <td>{item.key2}</td>
-              <td>{item.baljucheo}</td>
-              <td>{item.leadtime}</td>
-              <td>{item.gyeonjeokhwapye}</td>
-              <td>{item.gyeonjeokdanga}</td>
+      <div className="searchList">
+        <table>
+          <thead>
+            <tr>
+              {/* 체크박스 전체 클릭 */}
+              <th><input type={'checkbox'} onChange={(e) => handleAllCheck(e.target.checked)}
+                checked={checkItems?.length === data?.length ? true : false}></input></th>
+              <th>Machinery</th>
+              <th>청구품목</th>
+              <th>Part.No</th>
+              <th>카테고리</th>
+              <th>발주처</th>
+              <th>리드타임(일)</th>
+              <th>견적화폐</th>
+              <th>견적단가</th>
             </tr>
-          ))
-        : <></>}        
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentPosts && data.length > 0 ? currentPosts.map((item, index) => (
+              //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
+              //클릭하면 테이블에서 삭제하는 코드(현재 안씀)
+              // <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
+              <tr key={index} >
+                {/* 체크박스 클릭 */}
+                <td><input type={'checkbox'} onChange={(e) => handleSingleCheck(e.target.checked, item.id)}
+                  checked={checkItems.includes(item.id) ? true : false}></input></td>
+                {/* 클릭하면 과거 데이터로 이동(뒤로가기하면 view1이 리셋되는 현상 해결해야함) */}
+                {/* 한 행 전체를 link로 걸면 체크박스를 클릭해도 과거데이터로 이동해버림 */}
+                <td><Link to='/view2' state={item}>{item.machinery}</Link></td>
+                <td>{item.items}</td>
+                <td>{item.part1}</td>
+                <td>{item.key2}</td>
+                <td>{item.baljucheo}</td>
+                <td>{item.leadtime}</td>
+                <td>{item.gyeonjeokhwapye}</td>
+                <td>{item.gyeonjeokdanga}</td>
+              </tr>
+            ))
+              : <></>}
+          </tbody>
+        </table>
+      </div>
+      {/* 페이징 기능 */}
       {count && <Paging page={currentpage} count={count} setPage={setPage} />}
       {checkItems.length > 0 && <button onClick={removeRow}>선택 삭제</button>}
       {checkItems.length > 0 && <button onClick={addItemBasket}>선택 저장</button>}

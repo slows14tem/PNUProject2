@@ -14,11 +14,13 @@ import NavBar from './Component/NavBar/NavBar'
 //라우터 구조, 순서 생각할 필요 있음
 //1. 기본화면 '/' 어떤 view로 잡을 건지
 //2. 페이지가 실행되면 기본이 로그인화면인지 아니면 1에서 설정한 기본화면인지
+//==> 로그인이 기본화면
 
 function App() {
 
   let dispatch = useDispatch();
 
+  //어플이 시작되면 통신해서 선택용 리스트 호출
   useEffect(() => {
     (async () =>
       await axios

@@ -4,7 +4,7 @@ import { getSearchInfoRD } from "../../Component/Store/Store";
 
 //검색 및 검색어 자동완성 기능
 
-function Search(){
+function Search() {
 
   let dispatch = useDispatch();
   //미리 통신된 리스트를 호출
@@ -49,7 +49,7 @@ function Search(){
   };
 
   //검색항목이 변경될때마다 검색창 리셋
-  useEffect(()=>{
+  useEffect(() => {
     setSelectedOption("")
   }, [data])
 
@@ -57,41 +57,42 @@ function Search(){
   const searchData = (e) => {
     e.preventDefault();
     //중복제거 값에서 검색결과만 출력(검색어가 포함된 모든 단어 포함 가능)
-    setSearchResults(
-      options.filter((option) => option.includes(selectedOption))
-    );
+    // setSearchResults(
+    //   options.filter((option) => option.includes(selectedOption))
+    // );
     const output = [];
     output.push(selected); //검색조건
     output.push(selectedOption);  //검색어
     dispatch(getSearchInfoRD(output));  //redux에 저장
   };
 
-  return(
+  return (
     <>
-      <div>
-          <select onChange={handleSelect}>
-            {selectList.map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
+      <div className="itemSearchView">
+        <select className="searchItemCategory" onChange={handleSelect}>
+          {selectList.map((item) => (
+            <option value={item} key={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <form onSubmit={searchData}>
+          {/* 입력시 대소문자 구분 필요 - 필요 없이 만들어야 할까? */}
+          <input
+            className="searchItemInput"
+            list="options"
+            value={selectedOption}
+            onChange={handleChange}
+          />
+          <datalist id="options">
+            {/* options라는 배열의 요소를 option태그 의 value 값에 넣기 */}
+            {options.map((option) => (
+              <option key={option} value={option} />
             ))}
-          </select>
-          <form onSubmit={searchData}>
-            {/* 입력시 대소문자 구분 필요 - 필요 없이 만들어야 할까? */}
-            <input
-              list="options"
-              value={selectedOption}
-              onChange={handleChange}
-            />
-            <datalist id="options">
-              {/* options라는 배열의 요소를 option태그 의 value 값에 넣기 */}
-              {options.map((option) => (
-                <option key={option} value={option} />
-              ))}
-            </datalist>
-            <button type="submit">검색</button>
-          </form>
-        </div>
+          </datalist>
+          <button type="submit">검색</button>
+        </form>
+      </div>
     </>
   );
 }

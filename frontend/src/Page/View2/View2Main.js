@@ -15,30 +15,27 @@ function View2Main() {
   const [pageTitle, setPageTitle] = useState(null);
   const [oldList, setOldList] = useState(null);
 
+  //선택 상품의 과거 정보 호출
   useEffect(()=>{
     const oldData = [];
     SelectList.map((item)=>{
     if(item.machinery === data.machinery && item.items === data.items && item.part1 === data.part1){
-      setPageTitle(data.machinery, " / ", data.items, " / ", data.part1)
+      setPageTitle(data.machinery + ">" + data.items + ">" + data.part1)
       oldData.push({
         "x": item.leadtime, 
         "y": moment(item.balju).format('YYYY-MM-DD')
       })
     }});
-    setOldList(oldData);
-    
+    setOldList(oldData);    
   },[])
-
-  
 
   return (
     <>
-      <div>
+      <div className="view2Main">
         {pageTitle} 상품의 최근 리드타임 내역
         <Graph props={oldList} />
         {/* 해당 상품의 관련 상품 추천 추가 */}
       </div>
-
     </>
   );
 }
