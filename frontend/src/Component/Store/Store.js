@@ -14,6 +14,18 @@ let SelectList = createSlice({
   }
 })
 
+//뒤로가기 했을 때 검색 결과 유지
+let SearchInfo = createSlice({
+  name: 'SearchInfo',
+  initialState: [],
+  reducers: {
+    getSearchInfoRD(state, action) {
+      state = action.payload;
+      return state
+    }
+  }
+})
+
 //장바구니 목록
 let Basket = createSlice({
   name: 'Basket',
@@ -48,6 +60,7 @@ let BasketList = createSlice({
 export default configureStore({
   reducer: {
     SelectList: SelectList.reducer,
+    SearchInfo: SearchInfo.reducer,
     Basket: Basket.reducer,
     BasketList: BasketList.reducer
 
@@ -55,5 +68,6 @@ export default configureStore({
 })
 
 export let { getSelectListRD } = SelectList.actions
+export let { getSearchInfoRD } = SearchInfo.actions
 export let { getBasketRD } = Basket.actions
 export let { getBasketListRD } = BasketList.actions

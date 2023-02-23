@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { AppContext } from "./View1Main";
+import { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { getSearchResults, addBasket } from "../../API/funcAPI";
 import { Paging } from "../../Component/Paging/Paging";
@@ -9,23 +9,23 @@ import { Paging } from "../../Component/Paging/Paging";
 
 function SelectedList() {
 
+  let { SearchInfo } = useSelector((state) => { return state })
   const [data, setData] = useState(); //통신 데이터 저장
   const [checkItems, setCheckItems] = useState([]); //체크한 아이템 저장
-  const [lead, setLead] = useContext(AppContext);
 
   //검색조건이 포함된 리스트 호출(통신 호출할지 redux로 필터링 할지 결정못함)
   useEffect(() => {
     //context값(lead)가 빈값이 아닐때 통신 호출
-    if (lead[0] !== '') {
+    if (SearchInfo[0] !== '') {
       (async () => {
-        await getSearchResults(lead)
+        await getSearchResults(SearchInfo)
           .then((res) => {
             //모든 데이터를 datas에 넣기
             setData(res);
           })
       })();
     }
-  }, [lead]);
+  }, [SearchInfo]);
 
   // 체크박스 단일 선택
   const handleSingleCheck = (checked, id) => {
@@ -86,6 +86,7 @@ function SelectedList() {
     setCurrentPosts(data?.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentpage, indexOfFirstPost, indexOfLastPost, data, postPerPage]);
 
+  //페이지 변경할때마다 발생하는 이벤트(새로운 페이지 입력)
   const setPage = (e) => {
     setCurrentpage(e);
   };
@@ -132,7 +133,7 @@ function SelectedList() {
         : <></>}        
         </tbody>
       </table>
-      <Paging page={currentpage} count={count} setPage={setPage} />
+      {count && <Paging page={currentpage} count={count} setPage={setPage} />}
       {checkItems.length > 0 && <button onClick={removeRow}>선택 삭제</button>}
       {checkItems.length > 0 && <button onClick={addItemBasket}>선택 저장</button>}
     </>

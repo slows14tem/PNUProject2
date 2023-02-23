@@ -1,28 +1,18 @@
-import { useState, useEffect, useContext } from "react";
-import { useSelector } from 'react-redux';
-import { AppContext } from "./View1Main";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getSearchInfoRD } from "../../Component/Store/Store";
 
 //검색 및 검색어 자동완성 기능
 
 function Search(){
 
+  let dispatch = useDispatch();
+  //미리 통신된 리스트를 호출
   let { SelectList } = useSelector((state) => { return state })
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [lead, setLead] = useContext(AppContext);
-
-  //페이지가 렌더링 되면 자동완성 리스트에 출력될 데이터 호출
-  // useEffect(() => {
-  //   (async () => {
-  //     await getSelectList()
-  //       .then((res) => {
-  //         //모든 데이터를 datas에 넣기
-  //         setdatas(res);
-  //       })
-  //   })();
-  // }, []);
 
   //검색조건 리스트
   const selectList = ["===검색항목선택===", "발주처", "부품대분류", "부품명", "부품번호"];
@@ -70,16 +60,11 @@ function Search(){
     setSearchResults(
       options.filter((option) => option.includes(selectedOption))
     );
-  };
-
-  //검색된 정보(검색조건, 검색어)를 상위 컴포넌트로 올리기 위한 로직
-  useEffect(()=>{
     const output = [];
     output.push(selected); //검색조건
     output.push(selectedOption);  //검색어
-    setLead(output);  //useContext에 넣기
-    // setLead2(datas)
-  },[searchResults])
+    dispatch(getSearchInfoRD(output));  //redux에 저장
+  };
 
   return(
     <>
