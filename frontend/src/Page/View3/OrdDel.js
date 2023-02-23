@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { delBasket } from '../../API/funcAPI';
 
 //데이터 삭제 후 리렌더링 안되서 삭제 안된것처럼 보임
-function OrdDel(){
+function OrdDel() {
   let { BasketList } = useSelector((state) => { return state })
 
   //리덕스로 체크박스 선택한 항목들을 장바구니 테이블에서 삭제
@@ -16,8 +16,10 @@ function OrdDel(){
 
   return (
     <>
-      <button onClick={deleteBasket}>목록 삭제</button>
-      <button>주문하기</button>
+      <div className='basketButtons'>
+        <button onClick={deleteBasket}>목록 삭제</button>
+        <button>주문하기</button>
+      </div>
     </>
   );
 }

@@ -88,7 +88,7 @@ public class AuthService {
         // 6. 저장소 정보 업데이트
         RefreshToken newRefreshToken = refreshToken.updateValue(tokenDto.getRefreshToken());
         refreshTokenRepository.save(newRefreshToken);
-
+        System.out.println(tokenDto);
         // 토큰 발급
         return tokenDto;
     }

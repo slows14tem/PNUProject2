@@ -1,11 +1,11 @@
-import { defaultInstance, authInstance } from './indexAPI'
+import { NotAuthInstance, authInstance } from './indexAPI'
 
 //생성된 axios인스턴스를 사용해 API호출
 
 //login - return yes(리덕스 저장 필요없음)
 export const login = async (requestBody) => {
   try {
-    const { data } = await defaultInstance.post(
+    const { data } = await NotAuthInstance.post(
         "/auth/login",
         requestBody
       )
@@ -15,17 +15,17 @@ export const login = async (requestBody) => {
   }
 }
 
-//login - return yes(redux로 대체)
-// export const getSelectListAx = async () => {
-//   try{
-//     const {data}  = await authInstance.get(
-//       'get',
-//     )
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+// 목록 한번에 출력 - return yes(redux로 대체)
+export const getSelectList = async () => {
+  try{
+    const {data}  = await authInstance.get(
+      'get',
+    )
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 //login - return yes(입력마다 출력이 달라지기 때문에 리덕스 저장 불가)
 export const getSearchResults = async (requestBody) => {

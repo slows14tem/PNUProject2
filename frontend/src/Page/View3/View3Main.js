@@ -7,12 +7,12 @@ import BasketDate from "./BasketDate";
 import OrdDel from "./OrdDel";
 // 장바구니 리스트 출력 화면
 
-function View3Main(){
-  
+function View3Main() {
+
   let dispatch = useDispatch();
   const [component, setComponent] = useState("a");
 
-  useEffect(()=>{
+  useEffect(() => {
     (async () => {
       await getBasket()
         .then((res) => {
@@ -20,7 +20,7 @@ function View3Main(){
         })
         .catch(() => console.log("데이터가져오기 실패"))
     })();
-  },[])
+  }, [])
 
   const clickBasket = () => {
     setComponent("a")
@@ -30,12 +30,16 @@ function View3Main(){
     setComponent("b")
   }
 
-  return(
+  return (
     <>
-      <div onClick={clickBasket}>장바구니</div>
-      <div onClick={clickDate}>날짜보기</div>
-      {component === "a" ? <BasketList /> : <BasketDate />}     
-      <OrdDel />
+      <div className="view3Main">
+        <div className="orderNav">
+          <div className="basketList" onClick={clickBasket}>장바구니</div>
+          <div className="basketDate" onClick={clickDate}>날짜보기</div>
+        </div>
+        {component === "a" ? <BasketList /> : <BasketDate />}
+        <OrdDel />
+      </div>
     </>
   );
 }
