@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//@RedisHash(value = "refreshToken", timeToLive = 60)
 @Getter
 @NoArgsConstructor
 @Table(name = "refresh_token")
@@ -32,4 +33,6 @@ public class RefreshToken {
         this.value = token;
         return this;
     }
+	
+
 }

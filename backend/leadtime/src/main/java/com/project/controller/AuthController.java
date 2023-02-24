@@ -32,6 +32,7 @@ public class AuthController {
 
     @PostMapping("/data/auth/reissue")
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
+    	System.out.println(tokenRequestDto.getRefreshToken());
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
 }
