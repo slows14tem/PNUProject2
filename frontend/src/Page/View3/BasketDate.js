@@ -68,7 +68,6 @@ function BasketDate() {
   const selectDate = moment(order);
   const ramainTime = Math.ceil(moment.duration(selectDate.diff(today)).asDays());
 
-
   return (
     <>
       <input type='date' className="input" ref={refDateIn} onChange={handleChange} />
