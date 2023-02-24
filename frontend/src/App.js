@@ -5,10 +5,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSelectListRD } from "./Component/Store/Store"
 import AuthLayout from './Page/AuthLayout';
+import AdminLayout from './Page/AdminLayout';
 import View1Main from './Page/View1/View1Main';
 import View2Main from './Page/View2/View2Main';
 import View3Main from './Page/View3/View3Main';
 import Login from './Page/View4/Login';
+import Admin from './Page/View5/Admin';
 import NavBar from './Component/NavBar/NavBar'
 
 //라우터 구조, 순서 생각할 필요 있음
@@ -36,9 +38,12 @@ function App() {
     {/* 상단 네비게이션 바는 아무거나 일단 넣어놈 */}
       <NavBar/>
       
-      <Routes>
+      <Routes>        
         <Route>
           <Route path='/' element={<Login />} />
+        </Route>
+        <Route element={<AdminLayout/>}>
+          <Route path='/admin' element={<Admin />} />
         </Route>
         <Route element={<AuthLayout/>}> {/* 아래 페이지는 로그인으로 토큰 정보가 없으면 접근이 안되도록 함(로그인화면으로 자동 이동) */}
           <Route path='/view1' element={<View1Main />} />
