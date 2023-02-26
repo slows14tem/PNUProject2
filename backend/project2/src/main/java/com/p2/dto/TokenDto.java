@@ -2,18 +2,18 @@ package com.p2.dto;
 
 import lombok.Builder;
 
-
 public class TokenDto {
 
-    private String grantType;
-    private String accessToken;
-    private String refreshToken;
-    private Long accessTokenExpiresIn;
-    
-    public TokenDto() {
+	private String grantType;
+	private String accessToken;
+	private String refreshToken;
+	private Long accessTokenExpiresIn;
+
+	public TokenDto() {
 		// TODO Auto-generated constructor stub
 	}
-    @Builder
+
+	@Builder
 	public TokenDto(String grantType, String accessToken, String refreshToken, Long accessTokenExpiresIn) {
 		super();
 		this.grantType = grantType;
@@ -60,6 +60,4 @@ public class TokenDto {
 		this.accessTokenExpiresIn = accessTokenExpiresIn;
 	}
 
-
-	
 }

@@ -9,8 +9,9 @@ import javax.persistence.Id;
 
 @Entity
 public class LogVO {
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String machinery;
 	private String items; // 청구 품목

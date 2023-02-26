@@ -8,10 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Builder;
+
 @Builder
 @Entity
 public class PastLeadtimeVO {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String machinery;
 	private String items; // 청구 품목
 	private String part1; // Part No.1

@@ -1,7 +1,5 @@
 package com.p2.controller;
 
-
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,15 +16,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/member")
 public class MemberController {
-    private final MemberService memberService;
+	private final MemberService memberService;
 
-    @GetMapping("/me")
-    public ResponseEntity<MemberResponseDto> findMemberInfoById() {
-        return ResponseEntity.ok(memberService.findMemberInfoById(SecurityUtil.getCurrentMemberId()));
-    }
+	@GetMapping("/me")
+	public ResponseEntity<MemberResponseDto> findMemberInfoById() {
+		return ResponseEntity.ok(memberService.findMemberInfoById(SecurityUtil.getCurrentMemberId()));
+	}
 
-    @GetMapping("/{email}")
-    public ResponseEntity<MemberResponseDto> findMemberInfoByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(memberService.findMemberInfoByEmail(email));
-    }
+	@GetMapping("/{email}")
+	public ResponseEntity<MemberResponseDto> findMemberInfoByEmail(@PathVariable String email) {
+		return ResponseEntity.ok(memberService.findMemberInfoByEmail(email));
+	}
 }

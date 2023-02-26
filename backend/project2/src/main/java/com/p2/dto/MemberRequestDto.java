@@ -41,16 +41,13 @@ public class MemberRequestDto {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-    public MemberVO toMember(PasswordEncoder passwordEncoder) {
-        return MemberVO.builder()
-                .email(email)
-                .pass(passwordEncoder.encode(pass))
-                .role(Role.ROLE_MEMBER)
-                .build();
-    }
 
-    public UsernamePasswordAuthenticationToken toAuthentication() {
-        return new UsernamePasswordAuthenticationToken(email, pass);
-    }
+	public MemberVO toMember(PasswordEncoder passwordEncoder) {
+		return MemberVO.builder().email(email).pass(passwordEncoder.encode(pass)).role(Role.ROLE_MEMBER).build();
+	}
+
+	public UsernamePasswordAuthenticationToken toAuthentication() {
+		return new UsernamePasswordAuthenticationToken(email, pass);
+	}
 
 }

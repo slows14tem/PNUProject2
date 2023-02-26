@@ -11,29 +11,28 @@ public class LoginService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-	
+
 	public MemberVO getMember(Long id) {
-		MemberVO m = memberRepository.findById(id).get(); 
+		MemberVO m = memberRepository.findById(id).get();
 
 		return m;
 	}
-	
+
 	public MemberVO addMember(MemberVO member) {
-		member = memberRepository.save(member); 
+		member = memberRepository.save(member);
 		return member;
 	}
-	
+
 	public MemberVO updateMember(MemberVO member) {
 		MemberVO m = memberRepository.findById(member.getId()).get();
 		m.setPass(member.getPass());
 		return memberRepository.save(m);
 	}
-	
+
 	public MemberVO deleteMember(Long id) {
-		MemberVO m = memberRepository.findById(id).get(); 
+		MemberVO m = memberRepository.findById(id).get();
 		memberRepository.deleteById(id);
 		return m;
 	}
-
 
 }

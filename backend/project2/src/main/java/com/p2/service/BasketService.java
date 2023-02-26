@@ -10,7 +10,6 @@ import com.p2.domain.LeadtimeSearchVO;
 import com.p2.repository.BasketRepository;
 import com.p2.repository.LeadtimeSearchRepository;
 
-
 @Service
 public class BasketService {
 
@@ -18,14 +17,14 @@ public class BasketService {
 	private LeadtimeSearchRepository leadtimesearchrepository;
 	@Autowired
 	private BasketRepository basketrepository;
-	
+
 	public List<LeadtimeSearchVO> getSearch() {
 		return leadtimesearchrepository.getSearch();
 	}
 
 	public void addBasket(BasketVO[] basket) {
 		basketrepository.addBasket(basket);
-		
+
 	}
 
 	public List<BasketVO> getBasket() {
