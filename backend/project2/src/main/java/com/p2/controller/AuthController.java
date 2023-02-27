@@ -15,23 +15,23 @@ import com.p2.service.AuthService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/auth") //SecurityConfig 에서 /auth/** 요청은 전부 허용했기 때문에 토큰 검증 로직을 타지 않습니다.
+@RequestMapping("/auth") // SecurityConfig 에서 /auth/** 요청은 전부 허용했기 때문에 토큰 검증 로직을 타지 않습니다.
 @RequiredArgsConstructor
-public class AuthController {  //회원가입 / 로그인 / 재발급 을 처리하는 API 입니다.
-    private final AuthService authService;
+public class AuthController { // 회원가입 / 로그인 / 재발급 을 처리하는 API 입니다.
+	private final AuthService authService;
 
-    @PostMapping("/signup") 
-    public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) { 
-        return ResponseEntity.ok(authService.signup(memberRequestDto));
-    }
+	@PostMapping("/signup")
+	public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) {
+		return ResponseEntity.ok(authService.signup(memberRequestDto));
+	}
 
-    @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.login(memberRequestDto));
-    }
+	@PostMapping("/login")
+	public ResponseEntity<TokenDto> login(@RequestBody MemberRequestDto memberRequestDto) {
+		return ResponseEntity.ok(authService.login(memberRequestDto));
+	}
 
-    @PostMapping("/reissue")
-    public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
-        return ResponseEntity.ok(authService.reissue(tokenRequestDto));
-    }
+	@PostMapping("/reissue")
+	public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
+		return ResponseEntity.ok(authService.reissue(tokenRequestDto));
+	}
 }

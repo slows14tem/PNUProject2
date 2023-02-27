@@ -7,7 +7,8 @@ import javax.persistence.Id;
 
 @Entity
 public class LeadtimeSearchVO {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String baljucheo;
 	private String machinery;

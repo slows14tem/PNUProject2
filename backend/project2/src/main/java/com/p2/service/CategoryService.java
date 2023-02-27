@@ -12,8 +12,8 @@ import com.p2.repository.CategoryRepository;
 public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
-	public List<CategoryVO> getCategoryList(){
+
+	public List<CategoryVO> getCategoryList() {
 		return categoryRepository.getCategoryList();
 	}
 

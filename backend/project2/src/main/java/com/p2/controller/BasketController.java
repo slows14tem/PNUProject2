@@ -12,27 +12,26 @@ import com.p2.domain.BasketVO;
 import com.p2.domain.LeadtimeSearchVO;
 import com.p2.service.BasketService;
 
-
 @Controller
 public class BasketController {
 	@Autowired
 	private BasketService basketService;
-	
-	//자동완성 검색결과 출력(Order page)
+
+	// 자동완성 검색결과 출력(Order page)
 	@GetMapping("/data/search")
-	public List<LeadtimeSearchVO> getSearch(){
+	public List<LeadtimeSearchVO> getSearch() {
 		return basketService.getSearch();
 	}
-	
-	//겸색결과중 선택된 리스트를 저장
+
+	// 겸색결과중 선택된 리스트를 저장
 	@PostMapping("/data/balju")
 	public void addBasket(@RequestBody BasketVO[] basket) {
 		basketService.addBasket(basket);
 	}
-	
-	//저장된 리스트 출력
+
+	// 저장된 리스트 출력
 	@GetMapping("/data/baljulist")
-	public List<BasketVO> getBasket(){
+	public List<BasketVO> getBasket() {
 		return basketService.getBasket();
 	}
 

@@ -7,7 +7,8 @@ import javax.persistence.Id;
 
 @Entity
 public class LeadtimeResultVO {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String machinery;
 	private String items;
 	private String part1;

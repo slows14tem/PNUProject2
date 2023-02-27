@@ -6,7 +6,6 @@ import javax.persistence.Id;
 
 import lombok.Builder;
 
-
 @Entity
 public class RefreshTokenVO {
 
@@ -20,6 +19,7 @@ public class RefreshTokenVO {
 	public RefreshTokenVO() {
 		// TODO Auto-generated constructor stub
 	}
+
 	@Builder
 	public RefreshTokenVO(String key, String value) {
 		super();
@@ -47,9 +47,10 @@ public class RefreshTokenVO {
 	public void setValue(String value) {
 		this.value = value;
 	}
+
 	public RefreshTokenVO updateValue(String refreshToken) {
-        this.value = refreshToken;
-        return this;
+		this.value = refreshToken;
+		return this;
 	}
 
 }

@@ -10,24 +10,20 @@ import com.p2.domain.LogVO;
 import com.p2.domain.PastLeadtimeVO;
 import com.p2.repository.LeadtimeResultRepository;
 
-
-
-
 @Service
 public class LeadtimeService {
-	
+
 	@Autowired
 	private LeadtimeResultRepository leadtimerepository;
 
-	
-	public List<LeadtimeResultVO> getLeadtime(LeadtimeResultVO leadResult){
-		return leadtimerepository.getLeadtime(leadResult);		
+	public List<LeadtimeResultVO> getLeadtime(LeadtimeResultVO leadResult) {
+		return leadtimerepository.getLeadtime(leadResult);
 	}
-	
-	public List<PastLeadtimeVO> getPastLeadtime(PastLeadtimeVO original){
+
+	public List<PastLeadtimeVO> getPastLeadtime(PastLeadtimeVO original) {
 		return leadtimerepository.getPastLeadtime(original);
 	}
-	
+
 	public void addLog(LogVO log) {
 		leadtimerepository.addLog(log);
 	}

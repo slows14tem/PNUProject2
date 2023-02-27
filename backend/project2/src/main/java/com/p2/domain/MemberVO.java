@@ -38,8 +38,8 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "MemberVO [id=" + id + ", pass=" + pass + ", email=" + email + ", role=" + authority + ", enabled=" + enabled
-				+ "]";
+		return "MemberVO [id=" + id + ", pass=" + pass + ", email=" + email + ", role=" + authority + ", enabled="
+				+ enabled + "]";
 	}
 
 	public Long getId() {
