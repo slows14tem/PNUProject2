@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PaymentLogVO {
@@ -17,6 +19,14 @@ public class PaymentLogVO {
 	private String clients; // 발주처
 	private int order_quantity; // 발주수량
 	private int order_amount; // 발주금액
+
+	@ManyToOne
+	@JoinColumn(name = "ITEM_ID", nullable = false, updatable = false)
+	private ItemInfoVO items;
+
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID", nullable = false, updatable = false)
+	private MemberVO member;
 
 	public PaymentLogVO() {
 		// TODO Auto-generated constructor stub
