@@ -1,9 +1,16 @@
 package com.p2.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ItemInfoVO {
@@ -20,6 +27,14 @@ public class ItemInfoVO {
 	private String clients; // 발주처
 	private String currency; // 견적화폐
 	private int leadtime; // 리드타임
+
+	@OneToMany(mappedBy = "items", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	private List<PaymentLogVO> payment;
+
+	@OneToMany(mappedBy = "items", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	private List<BasketVO> basket;
 
 	public ItemInfoVO() {
 		// TODO Auto-generated constructor stub
