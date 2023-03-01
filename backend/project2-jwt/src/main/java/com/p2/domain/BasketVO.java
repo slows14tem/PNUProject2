@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class BasketVO {
@@ -15,6 +17,14 @@ public class BasketVO {
 	private int leadtime; // 리드타임
 	private int billing_amount; // 청구량
 	private String clients; // 발주처
+
+	@ManyToOne
+	@JoinColumn(name = "ITEM_ID", nullable = false, updatable = false)
+	private ItemInfoVO items;
+
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_ID", nullable = false, updatable = false)
+	private MemberVO member;
 
 	public BasketVO() {
 		// TODO Auto-generated constructor stub
@@ -83,6 +93,5 @@ public class BasketVO {
 	public void setClients(String clients) {
 		this.clients = clients;
 	}
-	
-    
+
 }
