@@ -1,5 +1,6 @@
 package com.p2.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,8 @@ public class PaymentLogVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(name = "payment_id")
+	private Long id;
 	private String item; // 청구품목
 	private String invoice; // 청구서번호
 	private String leadtime; // 리드타임
@@ -21,11 +23,11 @@ public class PaymentLogVO {
 	private int order_amount; // 발주금액
 
 	@ManyToOne
-	@JoinColumn(name = "ITEM_ID", nullable = false, updatable = false)
+	@JoinColumn(name = "item_id", nullable = false, updatable = false)
 	private ItemInfoVO items;
 
 	@ManyToOne
-	@JoinColumn(name = "MEMBER_ID", nullable = false, updatable = false)
+	@JoinColumn(name = "member_id", nullable = false, updatable = false)
 	private MemberVO member;
 
 	public PaymentLogVO() {
