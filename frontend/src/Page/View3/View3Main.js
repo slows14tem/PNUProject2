@@ -1,5 +1,7 @@
+import "./View3.css";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { BsCartCheck, BsCalendarEvent } from "react-icons/bs"
 import { getBasketRD } from "../../Component/Store/Store"
 import { getBasket } from "../../API/funcAPI";
 import BasketList from "./BasketList";
@@ -10,7 +12,7 @@ import OrdDel from "./OrdDel";
 function View3Main() {
 
   let dispatch = useDispatch();
-  const [component, setComponent] = useState("a");
+  const [component, setComponent] = useState(sessionStorage.getItem('basketView'));
 
   useEffect(() => {
     (async () => {
@@ -23,22 +25,26 @@ function View3Main() {
   }, [])
 
   const clickBasket = () => {
+    sessionStorage.setItem('basketView', "a");
     setComponent("a")
   }
 
   const clickDate = () => {
+    sessionStorage.setItem('basketView', "b");
     setComponent("b")
   }
 
   return (
     <>
-      <div className="view3Main">
-        <div className="orderNav">
-          <div className="basketList" onClick={clickBasket}>장바구니</div>
-          <div className="basketDate" onClick={clickDate}>날짜보기</div>
+      <div className="view3">
+        <div className="view3Main">
+          <div className="orderNav">
+            <button className="basket" onClick={clickBasket}><BsCartCheck className="icon" /></button>
+            <button className="basket" onClick={clickDate}><BsCalendarEvent className="icon" /></button>
+          </div>
+          {component === "a" ? <BasketList /> : <BasketDate />}
+          <OrdDel />
         </div>
-        {component === "a" ? <BasketList /> : <BasketDate />}
-        <OrdDel />
       </div>
     </>
   );
