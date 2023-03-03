@@ -23,8 +23,8 @@ function OrdDel() {
   return (
     <>
       <div className='basketButtons'>
-        <button onClick={deleteBasket}>목록 삭제</button>
-        <button>주문하기</button>
+        <button className="basketButton" onClick={deleteBasket}>목록 삭제</button>
+        <button className="basketButton">주문하기</button>
       </div>
     </>
   );

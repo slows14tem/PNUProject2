@@ -143,6 +143,18 @@ export const prediction = async (requestBody) => {
   }
 }
 
+export const predictAll = async (requestBody) => {
+  try{
+    const {data}  = await flaskInstance.post(
+      'predictAll',
+      requestBody
+    )
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //품목 추천
 export const recommendation = async (requestBody) => {
   try{

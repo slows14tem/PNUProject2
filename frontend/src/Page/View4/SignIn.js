@@ -42,7 +42,7 @@ function SignIn(){
   return(
     <div className="loginView">
       <div className="loginBox">
-        <h1 className="login">Sign In</h1>
+        <h1 className="login">Sign Up</h1>
         <div>
           <input className="inputBox" type='text' placeholder="Username" name='input_id' value={inputId} onChange={handleInputId} />
         </div>
@@ -50,8 +50,8 @@ function SignIn(){
           <input className="inputBox" type='password' placeholder="Password" name='input_pw' value={inputPw} onChange={handleInputPw} />
         </div>
         <div className="Butttons">
-          <button className="loginButton" type='button' onClick={onClickLogin}>Back to Login</button>
-          <button className="loginButton" type='button' onClick={onClickSignup}>Signin</button>
+          <button className="loginButton" type='button' onClick={onClickLogin}>Back to Sign In</button>
+          <button className="loginButton" type='button' onClick={onClickSignup}>Sign Up</button>
         </div>
       </div>
     </div>
