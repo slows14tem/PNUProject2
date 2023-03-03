@@ -17,13 +17,13 @@ function Recommendation(props) {
   //추천 상품 검색이 시간이 걸려서 아직 통신 완료 안되있을 때 메세지 띄움
   useEffect(() => {
     if (recommendList === undefined) {
-      setListStatus(<div>추천 결과를 호출 중입니다.</div>)
+      setListStatus(<div className="load">추천 결과를 호출 중입니다.</div>)
     } else if (!recommendList) {
-      setListStatus(<div>추천 상품이 없습니다.</div>)
+      setListStatus(<div className="none">추천 상품이 없습니다.</div>)
     } else {
       setListStatus(
         <div>
-          <table>
+          <table className="recTable">
             <thead>
               <tr>
                 <th>Machinery</th>
@@ -52,10 +52,10 @@ function Recommendation(props) {
   }, [recommendList])
 
   return (
-    <>
-      <div>해당 물품과 관련된 추천 상품입니다.</div>
+    <div className="rec">
+      <h4 className="announce">해당 물품과 관련된 추천 상품입니다.</h4>
       {listStatus}
-    </>
+    </div>
   );
 }
 

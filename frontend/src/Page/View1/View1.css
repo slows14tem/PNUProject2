@@ -1,34 +1,11 @@
 /* View1Main.js */
 .view1 {
-  width: 100%;
-  height: 92vh;
+  margin: 100px ;
 }
 
 .view1Main {
   width: 90vw;
-  margin-left: 2%;
 }
-
-.toCart {
-  float: right;
-  margin: 2vh 2vw;
-  width: 150px;
-  height: 20px;
-  padding: 3px 3px 3px 3px;
-  border: 2px solid #6255f6;
-  border-radius: 15px;
-  background-color: #fff;
-  font-size: small;
-  text-align: center;
-  text-decoration: none;
-  color: #6255f6;
-}
-
-.toCart:hover {
-  background-color: #6255f6;
-  color: #74e88b;
-}
-
 
 /* Search.js */
 .Searchh2 {
@@ -41,7 +18,7 @@
   align-items: center;
   background-color: #f5f5fa;
   margin: 10px 0;
-  padding: 5px;
+  padding: 0 5px;
   border-radius: 25px;
 }
 
@@ -59,7 +36,7 @@
 
 .searchItemInput {
   height: 30px;
-  padding: 0 2vw;
+  padding: 0 1vw 0 2vw;
   margin: 1vh 2vw 1vh 1vw;
   background-color: #fff;
   border: none;
@@ -100,14 +77,14 @@
 .searchTable {
   width:90vw;
   word-break: break-all;
-  height: auto;
+  height: 50vh;
   margin: 10px 0 30px 0;
   border-top: 1px solid;
   border-bottom: 1px solid;
   border-collapse: collapse;
 }
 
-th{
+.searchTable th{
   padding: 8px;
   text-align: center;
   font-weight: 500;
@@ -116,7 +93,7 @@ th{
   text-transform: uppercase;
 }
 
-td {
+.searchTable td {
   padding: 8px 8px 8px 10px;
   text-align: center;
   font-weight: 300;
@@ -129,7 +106,7 @@ td {
   width: 30vw;
 }
 
-.link {
+.listLink {
   text-decoration: none;
   color: #6255f6;
   font-weight: 500;
@@ -147,6 +124,25 @@ td {
   text-align: right;
   padding-right: 2vw;
   width: 8vw;
+}
+
+.pageButton {
+  float: right;
+  margin: 5px;
+  width: 70px;
+  height: 50px;
+  padding: 3px 3px 3px 3px;
+  border: 2px solid #6255f6;
+  border-radius: 15px;
+  background-color: #fff;
+  text-align: center;
+  text-decoration: none;
+  color: #6255f6;
+}
+
+.pageButton:hover {
+  background-color: #6255f6;
+  color: #74e88b;
 }
 
 @media (max-width: 744px) {

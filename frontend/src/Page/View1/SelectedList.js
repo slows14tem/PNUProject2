@@ -1,7 +1,7 @@
 import "./View1.css";
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
+
 import { getSearchResults, addBasket } from "../../API/funcAPI";
 import { Paging } from "../../Component/Paging/Paging";
 import jwtDecode from "jwt-decode";
@@ -46,7 +46,7 @@ function SelectedList() {
   const handleSingleCheck = (checked, id) => {
     if (checked) {
       // 단일 선택 시 체크된 아이템을 배열에 추가
-      setCheckItems(prev => [...prev, id]);
+      setCheckItems([...checkItems, id]);
     } else {
       // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
       setCheckItems(checkItems.filter((el) => el !== id));
@@ -58,7 +58,7 @@ function SelectedList() {
     if (checked) {
       // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
       const idArray = [];
-      data.forEach((el) => idArray.push(el.id));
+      currentPosts.forEach((el) => idArray.push(el.id));
       setCheckItems(idArray);
     }
     else {
@@ -83,6 +83,7 @@ function SelectedList() {
     // arr.push(data?.filter((item) => checkItems.includes(item.id)).map((i)=>[i.id, parseInt(decode.sub)]));
     data?.filter((item) => checkItems.includes(item.id)).map((i)=>{arr.push([i.id, parseInt(decode.sub)])});
     //배열을 db에 저장
+
     (async () => {
       await addBasket(arr)
         .then((res) => res)
@@ -104,6 +105,7 @@ function SelectedList() {
     setIndexOfLastPost(currentpage * postPerPage);
     setIndexOfFirstPost(indexOfLastPost - postPerPage);
     setCurrentPosts(data?.slice(indexOfFirstPost, indexOfLastPost));
+    setCheckItems([]); //페이지 넘겼을 때 전체 선택 체크박스가 클릭되어있는 현상 수정
   }, [currentpage, indexOfFirstPost, indexOfLastPost, data, postPerPage]);
 
   //페이지 변경할때마다 발생하는 이벤트(새로운 페이지 입력)
@@ -119,13 +121,12 @@ function SelectedList() {
             <tr>
               {/* 체크박스 전체 클릭 */}
               <th><input className="th1" type={'checkbox'} onChange={(e) => handleAllCheck(e.target.checked)}
-                checked={checkItems?.length === data?.length ? true : false}></input></th>
+                checked={checkItems?.length === currentPosts?.length ? true : false}></input></th>
               <th className="th2">Machinery</th>
               <th className="th2">청구품목</th>
               <th className="th2">Part.No</th>
               <th className="th2">카테고리</th>
               <th className="th2">발주처</th>
-              <th className="th3">리드타임(일)</th>
               <th className="th3">견적화폐</th>
               <th className="thcost">견적단가</th>
             </tr>
@@ -141,12 +142,11 @@ function SelectedList() {
                   checked={checkItems.includes(item.id) ? true : false}></input></td>
                 {/* 클릭하면 과거 데이터로 이동(뒤로가기하면 view1이 리셋되는 현상 해결해야함) */}
                 {/* 한 행 전체를 link로 걸면 체크박스를 클릭해도 과거데이터로 이동해버림 */}
-                <td><Link className="link" to='/view2' state={item}>{item.machinery}</Link></td>
+                <td className="th2">{item.machinery}</td>
                 <td className="th2">{item.items}</td>
                 <td className="th2">{item.part1}</td>
                 <td className="th2">{item.category}</td>
-                <td className="th2">{item.client}</td>
-                <td className="th3">{item.leadtime}</td>
+                <td className="th2">{item.clients}</td>
                 <td className="th3">{item.currency}</td>
                 <td className="thcost">{fixPrice(parseInt(item.esti_unit_price))}</td>
               </tr>
