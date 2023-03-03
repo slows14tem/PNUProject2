@@ -27,7 +27,7 @@ public class Basket {
 	private int leadtime;			//리드타임
 	private int billing_amount;		//청구량
 	private String clients;			//발주처
-	private int esti_unit_price; 	 //견적단가
+	private int esti_unit_price; 	//견적단가
 	
 	@ManyToOne
 	@JoinColumn(name="item_id", nullable=false, updatable=false)

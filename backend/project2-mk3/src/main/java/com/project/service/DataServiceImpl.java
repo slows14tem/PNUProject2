@@ -90,7 +90,10 @@ public class DataServiceImpl implements DataService{
         payment.setClients(basket.getClients());
         payment.setOrder_qty(basket.getBilling_amount());
         payment.setOrder_price(basket.getEsti_unit_price() * basket.getBilling_amount());
-        return paymentRepo.save(payment);
+        payment = paymentRepo.save(payment);
+        basketRepo.delete(basket);
+        return payment;
+        
     }
 		
 }
