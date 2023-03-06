@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBasketListRD } from "../../Component/Store/Store";
 import { predictAll } from "../../API/funcAPI";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import moment from 'moment';
 import Calendar from 'react-calendar';
 
@@ -12,6 +12,7 @@ import Calendar from 'react-calendar';
 function BasketDate() {
 
   let dispatch = useDispatch();
+  const navigate = useNavigate();
   let { Basket } = useSelector((state) => { return state })
   const [checkItems, setCheckItems] = useState([]);
   const [data, setData] = useState();
@@ -110,7 +111,9 @@ function BasketDate() {
     setData([...data].sort((a, b) => a['items'][`${params}`].localeCompare(b['items'][`${params}`])));    
   };
 
-
+  const handleClicktd = (item) => {
+    navigate('/view2', { state: item })
+  }
 
   return (
     <>
@@ -125,6 +128,7 @@ function BasketDate() {
             <div className="categoryName"> {kitem} </div>
             <table className="orderTable">
               <thead>
+                <tr><td></td></tr>
                 <tr>
                   <th></th>
                   <th className="th2">카테고리</th>
@@ -149,15 +153,16 @@ function BasketDate() {
                         };
                         handleSingleCheck(e.target.checked, item.id)}}
                         checked={checkItems.includes(item.id) ? true : false}></input></td>
-                      <td>{item.items.category}</td>
-                      <td><Link className="listLink" to='/view2' state={item.items}>{item.items.machinery}</Link></td>
-                      <td>{item.items.items}</td>
-                      <td>{item.items.part1}</td>
-                      <td>{item.items.clients}</td>
-                      <td>{item.predictLead}</td>
-                      <td>{item.items.currency}</td>
-                      <td>{fixPrice(parseInt(item.items.esti_unit_price))}</td>
-                      <td className="th1">{ramainTime - item.items.leadtime > 7 ? "" :
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.items.category}</td>
+                      {/* <td onClick={handleTdClick(item.items)}><Link className="listLink" to='/view2' state={item.items}>{item.items.machinery}</Link></td> */}
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.items.machinery}</td>
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.items.items}</td>
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.items.part1}</td>
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.items.clients}</td>
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.predictLead}</td>
+                      <td onClick={(e) => handleClicktd(item.items)}>{item.items.currency}</td>
+                      <td onClick={(e) => handleClicktd(item.items)}>{fixPrice(parseInt(item.items.esti_unit_price))}</td>
+                      <td onClick={(e) => handleClicktd(item.items)} className="th1">{ramainTime - item.items.leadtime > 7 ? "" :
                     ramainTime - item.items.leadtime > 0 ? `${ramainTime - item.items.leadtime}일이내 주문 필요` : "주문불가능"}</td>
                     </tr>
                   ))
