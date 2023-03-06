@@ -81,7 +81,7 @@ export const getSearchResults = async (requestBody) => {
 export const addBasket = async (requestBody) => {
   try {
     const { data } = await authInstance.post(
-        "basket",
+        "addbasket",
         requestBody
       )
     return data

@@ -40,7 +40,7 @@ function Recommendation(props) {
                 <tr key={index} >
                   <td>{item.machinery}</td>
                   <td>{item.Assembly}</td>
-                  <td>{item.item}</td>
+                  <td>{item.items}</td>
                   <td>{item.part1}</td>
                 </tr>
               ))}

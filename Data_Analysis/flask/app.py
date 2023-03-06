@@ -22,10 +22,6 @@ with open('./lead_Linear.pickle', 'rb') as f:
     model_lead = pickle.load(f)
 with open('./lead_linear_vectorizer.pickle', 'rb') as f:
     vectorizer_lead = pickle.load(f)
-    
-# #추천 알고리즘 불러오기(피클파일이 에러 발생시킴)
-# with open('./recommend_items.pickle', 'rb') as f:
-#     model_recommend = pickle.load(f)
 
 @app.route('/data/classifier', methods=['GET', 'POST'])
 def classify():
@@ -59,8 +55,7 @@ def predict():
         data1 = params['data1']
         data2 = params['data2']
         data3 = params['data3']
-        data4 = params['data4']
-        data = [data1 + ' ' + data2 + ' ' + data3 + ' ' + data4]
+        data = [data1 + ' ' + data2 + ' ' + data3]
         
         # feature vector 생성
         X = vectorizer_lead.transform(data)
@@ -79,10 +74,8 @@ def predictAll():
             # print(i['items'])
             data1 = i['items']['subjects']
             data2 = i['items']['part1']
-            # data3 = i['items']['controlNo']
-            data3 = ""
-            data4 = i['items']['assembly']
-            data = [data1 + ' ' + data2 + ' ' + data3 + ' ' + data4]
+            data3 = i['items']['assembly']
+            data = [data1 + ' ' + data2 + ' ' + data3]
             
             # feature vector 생성
             X = vectorizer_lead.transform(data)
