@@ -29,6 +29,7 @@ function BasketDate() {
 
       setData(Basket)
       setCategory(Basket.map((i) => i.items.category));
+
   }, [Basket])
 
   //체크박스 선택한 아이템을 redux에 입력
@@ -87,8 +88,10 @@ function BasketDate() {
     })
     setOrderDue(
       <ul className="ox">
+
         <li>입항일: {moment(value).format("YYYY-MM-DD")}</li>
         <br/>
+
         <li>⭕ 주문 가능 : {possible.length}</li>
         <li className="li">❗❗ 주문 임박 : {urgent.length}</li>
         <li>❌ 주문 불가 : {impossible.length}</li>
