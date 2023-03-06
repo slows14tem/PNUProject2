@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
-import moment from 'moment';
+import RandomDate from "../../Component/RamdomDate/RandomDate";
 import Graph from "./Graph";
 import Recommendation from "./Recommendation";
 import './View2.css';
@@ -25,7 +25,7 @@ function View2Main() {
       setPageTitle(data.machinery + " > " + data.items + " > " + data.part1)
       oldData.push({
         "x": item.leadtime, 
-        "y": moment(item.balju).format('YYYY-MM-DD')
+        "y": RandomDate()
       })
     }});
     setOldList(oldData);    

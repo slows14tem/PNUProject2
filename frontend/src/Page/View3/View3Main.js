@@ -18,7 +18,7 @@ function View3Main() {
     (async () => {
       await getBasket()
         .then((res) => {
-          dispatch(getBasketRD(res));
+          dispatch(getBasketRD(res.basket));
         })
         .catch(() => console.log("데이터가져오기 실패"))
     })();
