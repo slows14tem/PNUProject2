@@ -1,13 +1,12 @@
 /* View3Main */
 .view3Main {
-  padding: 3vh 5vw;
+  margin: 100px ;
 }
 
 .orderNav {
-  bottom: -0;
+  bottom: 30px;
   position: fixed;
   align-items: center;
-  margin: 0 0 3vh 0;
 }
 
 .basket {
@@ -37,12 +36,13 @@
   color: #6255f6;
 }
 
-.orderList {
+.OrderList {
   margin: 10px 0 30px 0;
+  height: 70vh;
+  overflow: scroll;
 }
 
-table {
-  width:90vw;
+.orderTable {
   word-break: break-all;
   height: auto;
   border-top: 1px solid;
@@ -51,8 +51,8 @@ table {
   margin-top: 5px;
 }
 
-th{
-  padding: 8px;
+.orderTable th{
+  padding: 8px 6px;
   text-align: center;
   font-weight: 500;
   font-size: 12px;
@@ -60,8 +60,8 @@ th{
   text-transform: uppercase;
 }
 
-td {
-  padding: 8px 8px 8px 10px;
+.orderTable td {
+  padding: 8px 6px 8px 6px;
   text-align: center;
   font-weight: 300;
   font-size: 12px;
@@ -70,12 +70,11 @@ td {
 }
 
 .th2 {
-  width: 30vw;
+  width: 25vw;
 }
 
 .leadtimeByCategory {
-  margin-bottom: 30px;
-  width: 90vw;
+  margin: 5px 10px 20px 0;
   justify-content: flex-end;
   display: flex;
   gap: 2vw;
@@ -100,6 +99,94 @@ td {
   padding: 10px;
   border: 1px solid;
   border-radius: 5px;
+}
+
+/* OrdDel.js */
+.basketButton {
+  float: right;
+  margin: 5px;
+  width: 70px;
+  height: 50px;
+  padding: 3px 3px 3px 3px;
+  border: 2px solid #6255f6;
+  border-radius: 15px;
+  background-color: #fff;
+  text-align: center;
+  text-decoration: none;
+  color: #6255f6;
+}
+
+.basketButton:hover {
+  background-color: #6255f6;
+  color: #74e88b;
+}
+
+/* BasketDate.js */
+.dateList {
+  height: 70vh;
+  overflow: auto;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.thead {
+  position: sticky;
+  top: 0;
+  background-color: #f5f5fa;
+  margin-top: 0;
+}
+
+.dateTable {
+  width: 66vw;
+  word-break: break-all;
+  height: auto;
+  border-bottom: 1px solid #6d6d6d;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+
+.dateTable th{
+  padding: 8px ;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+  color: black;
+  text-transform: uppercase;
+}
+
+.dateTable td {
+  text-align: center;
+  font-weight: 300;
+  font-size: 12px;
+  color: black;
+  border-top: 1px solid #c5c5c5;
+}
+
+.th1 {
+  width: 2vw;
+  padding: 8px, 2px;
+}
+
+.check {
+  width: 4px;
+  padding: 8px 0;
+  margin: 0;
+}
+
+.ox {
+  padding: 10px;
+}
+
+.li {
+  padding: 5px 3px;
+}
+
+/* Calender */
+.calender {
+  border: #6255f6 3px solid;
+  border-radius: 25px;
+  padding: 15px;
+  color: #6255f6;
 }
 
 @media (max-width: 430px) {

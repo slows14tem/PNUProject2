@@ -1,9 +1,9 @@
 import './App.css';
-import axios from "axios";
 import { Route, Routes } from 'react-router-dom';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSelectListRD } from "./Component/Store/Store"
+import { getList } from './API/funcAPI';
 import AuthLayout from './Page/AuthLayout';
 import AdminLayout from './Page/AdminLayout';
 import View1Main from './Page/View1/View1Main';
@@ -25,13 +25,11 @@ function App() {
 
   //어플이 시작되면 통신해서 선택용 리스트 호출
   useEffect(() => {
-    (async () =>
-      await axios
-        .get("http://localhost:8080/data/get")
-        .then((result) => {
-          dispatch(getSelectListRD(result.data));
-        })
-        .catch(() => console.log("데이터가져오기 실패")))();
+    (async () => {
+      await getList()
+        .then((res) => dispatch(getSelectListRD(res)))
+        .catch(() => console.log("데이터가져오기 실패"))
+    })();
   }, []);
 
 

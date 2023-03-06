@@ -82,8 +82,8 @@ function Login() {
           <input className="inputBox" type='password' placeholder="Password" name='input_pw' value={inputPw} onChange={handleInputPw} />
         </div>
         <div className="Butttons">
-          <button className="loginButton" type='button' onClick={onClickLogin}>Login</button>
-          <button className="loginButton" type='button' onClick={onClickSignup}>Signin</button>
+          <button className="loginButton" type='button' onClick={onClickLogin}>Sign In</button>
+          <button className="loginButton" type='button' onClick={onClickSignup}>Sign Up</button>
         </div>
       </div>
     </div>

@@ -59,6 +59,11 @@ function BasketList() {
     ))
   }
 
+  const sortByName = () => {
+    //카테고리별로 분류
+    setData([...data].sort((a, b) => a.items.machinery.localeCompare(b.items.machinery)));
+  };
+
   return (
     <>
       <h2 className="cart">장바구니</h2>      
@@ -71,7 +76,7 @@ function BasketList() {
                 <tr>
                   <th></th>
                   <th className="th2">카테고리</th>
-                  <th className="th2">Machinery</th>
+                  <th className="th2" onClick={sortByName}>Machinery</th>
                   <th className="th2">청구품목</th>
                   <th className="th2">Part.No</th>
                   <th className="th2">발주처</th>
@@ -91,7 +96,7 @@ function BasketList() {
                       <td>{item.items.machinery}</td>
                       <td>{item.items.items}</td>
                       <td>{item.items.part1}</td>
-                      <td>{item.items.client}</td>
+                      <td>{item.items.clients}</td>
                       <td>{item.items.leadtime}</td>
                       <td>{item.items.currency}</td>
                       <td>{fixPrice(parseInt(item.items.esti_unit_price))}</td>
