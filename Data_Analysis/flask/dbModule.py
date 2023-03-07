@@ -2,10 +2,11 @@ import pymysql
 
 class Database():
     def __init__(self):
-        self.db = pymysql.connect(host='localhost',
-                                  user='musthave',
+        self.db = pymysql.connect(host='127.0.0.1',
+                                  port=3305,
+                                  user='DockerDBTest',
                                   password='tiger',
-                                  db='bigdata',
+                                  db='ship',
                                   charset='utf8')
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
  

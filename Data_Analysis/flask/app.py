@@ -50,7 +50,6 @@ def classify():
 def predict():
     if request.method == 'POST':
         params = request.get_json()
-        print("param: ", params)
         # 예측값 입력 받기
         data1 = params['data1']
         data2 = params['data2']
@@ -70,8 +69,7 @@ def predict():
 def predictAll():
     if request.method == 'POST':
         params = request.get_json()
-        for i in params:
-            # print(i['items'])
+        for i in params['basket']:
             data1 = i['items']['subjects']
             data2 = i['items']['part1']
             data3 = i['items']['assembly']
