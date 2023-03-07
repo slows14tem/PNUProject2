@@ -5,7 +5,7 @@ services:
     build:
       context: ./Data_Analysis/flask
       dockerfile: Dockerfile
-    image: upcoderk/flask-app:latest
+    image: kyunggwan/flask-app:latest
   # react:
   #   build:
   #     context: ./frontend
@@ -15,4 +15,4 @@ services:
     build:
       context: ./backend/leadtime
       dockerfile: Dockerfile
-    image: upcoderk/spring-boot-app:latest
+    image: kyunggwan/spring-boot-app:latest
