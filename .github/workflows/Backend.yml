@@ -26,6 +26,14 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package --file backend/leadtime/pom.xml
+        
+      - name: Set secrets for forked repo owner
+        uses: tcardonne/github-actions/setup-forked-repo-secret@v1
+        with:
+          secret_name: DOCKERHUB_PASSWORD
+          org: ${{ github.event.pull_request.head.repo.owner.login }}
+          repo: ${{ github.event.pull_request.head.repo.name }}
+          token: ${{ secrets.GIT_TOKEN }}
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
