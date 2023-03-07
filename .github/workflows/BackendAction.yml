@@ -1,8 +1,8 @@
 name: Deploy to Amazon ECS
 
 on:
-  pull_request_review:
-    types: [ "submitted" ]
+  pull_request:
+    types: [closed]
     branches: [ "master" ]
 
 # action이 가진 repo에 대한 권한
