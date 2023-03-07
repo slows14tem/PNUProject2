@@ -32,6 +32,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Create an issue
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          token: ${{ secrets.GIT_TOKEN }}
           
       - name: Install Docker Compose
         run: |      
