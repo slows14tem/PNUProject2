@@ -3,8 +3,7 @@ import "react-calendar/dist/Calendar.css";
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBasketListRD } from "../../Component/Store/Store";
-import { predictAll } from "../../API/funcAPI";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 import Calendar from 'react-calendar';
 
@@ -19,18 +18,16 @@ function BasketDate() {
   const [category, setCategory] = useState();
   const [orderDue, setOrderDue] = useState();
   const [value, onChange] = useState(new Date());
-  const [lead, setLead] = useState();
 
   const fixPrice = useCallback(price => {
     return parseInt(price.toFixed(0)).toLocaleString();
   }, []);
 
-  //main에서 통신 호출된 장바구니를 state에 담기
+  //현재 조금 이상한 구조. 스프링부트에서 장바구니를 받아와서 그 데이터를 다시 플라스크로 보내서 리드타임 예측해옴
+  //좀더 효율적으로 변경할 필요 있음
   useEffect(() => {
-
-      setData(Basket)
-      setCategory(Basket.map((i) => i.items.category));
-
+    setData(Basket)
+    setCategory(Basket.map((i) => i.items.category));
   }, [Basket])
 
   //체크박스 선택한 아이템을 redux에 입력
@@ -89,10 +86,8 @@ function BasketDate() {
     })
     setOrderDue(
       <ul className="ox">
-
         <li>입항일: {moment(value).format("YYYY-MM-DD")}</li>
         <br/>
-
         <li>⭕ 주문 가능 : {possible.length}</li>
         <li className="li">❗❗ 주문 임박 : {urgent.length}</li>
         <li>❌ 주문 불가 : {impossible.length}</li>
@@ -106,9 +101,15 @@ function BasketDate() {
   const selectDate = moment(value);
   const ramainTime = Math.ceil(moment.duration(selectDate.diff(today)).asDays());
 
+  //입력된 params 별로 정렬
   const sortByMachinery = (params) => {
-    //입력된 params 별로 분류
-    setData([...data].sort((a, b) => a['items'][`${params}`].localeCompare(b['items'][`${params}`])));    
+    if (params === "leadtime"){      
+      setData([...data].sort((a, b) => a['predictLead'] - b['predictLead']));    
+    } else if (params === "esti_unit_price") {
+      setData([...data].sort((a, b) => a['items'][`${params}`] - b['items'][`${params}`]));
+    } else {
+    setData([...data].sort((a, b) => a['items'][`${params}`].localeCompare(b['items'][`${params}`])));
+    }
   };
 
   const handleClicktd = (item) => {
@@ -128,7 +129,6 @@ function BasketDate() {
             <div className="categoryName"> {kitem} </div>
             <table className="orderTable">
               <thead>
-                <tr><td></td></tr>
                 <tr>
                   <th></th>
                   <th className="th2">카테고리</th>
@@ -154,7 +154,6 @@ function BasketDate() {
                         handleSingleCheck(e.target.checked, item.id)}}
                         checked={checkItems.includes(item.id) ? true : false}></input></td>
                       <td onClick={(e) => handleClicktd(item.items)}>{item.items.category}</td>
-                      {/* <td onClick={handleTdClick(item.items)}><Link className="listLink" to='/view2' state={item.items}>{item.items.machinery}</Link></td> */}
                       <td onClick={(e) => handleClicktd(item.items)}>{item.items.machinery}</td>
                       <td onClick={(e) => handleClicktd(item.items)}>{item.items.items}</td>
                       <td onClick={(e) => handleClicktd(item.items)}>{item.items.part1}</td>
@@ -173,49 +172,11 @@ function BasketDate() {
               {/* 각 카테고리별 리드타임중 큰값 출력 */}
               {/* {kitem} */}
               <div> 총 {(data.filter((item) => kitem.includes(item.items.category))).length}개</div>
-              <div>소요 예상일: {Math.max(...data.filter((item) => kitem.includes(item.items.category)).map((i) => i.items.leadtime))}(일)</div>
+              <div>소요 예상일: {Math.max(...data.filter((item) => kitem.includes(item.items.category)).map((i) => i.predictLead))}(일)</div>
             </div>
           </div>
         )}
       </div>
-        {/* <div className="dateList">
-          <table className="dateTable">
-            <thead>
-              <tr className="thead">
-                <th className="check"></th>
-                <th onClick={sortByName} className="th1">카테고리</th>
-                <th className="th1">Machinery</th>
-                <th className="th1">청구품목</th>
-                <th className="th1">Part.No</th>
-                <th className="th1">발주처</th>
-                <th className="th1">리드타임(일)</th>
-                <th className="th1">견적화폐</th>
-                <th className="th1">견적단가</th>
-                <th className="th1"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.map((item, index) => (
-                <tr key={index}>
-                  <td className="check"><input type={'checkbox'} onChange={(e) => handleSingleCheck(e.target.checked, item.id)}
-                    checked={checkItems.includes(item.id) ? true : false}></input></td>
-                  <td className="th1">{item.items.category}</td>
-                  <td className="th1">{item.items.machinery}</td>
-                  <td className="th1">{item.items.items}</td>
-                  <td className="th1">{item.items.part1}</td>
-                  <td className="th1">{item.items.clients}</td>
-                  <td className="th1">{item.items.leadtime}</td>
-                  <td className="th1">{item.items.currency}</td>
-                  <td className="th1">{item.items.esti_unit_price}</td>
-                   3일 이내면 "~일 이내 주문 필요", 날짜가 지나면 "주문불가능"으로 띄움  
-                  <td className="th1">{ramainTime - item.items.leadtime > 7 ? "" :
-                    ramainTime - item.items.leadtime > 0 ? `${ramainTime - item.items.leadtime}일이내 주문 필요` : "주문불가능"}</td>
-                </tr>
-              ))
-              }
-            </tbody>
-          </table>
-        </div> */}
       </div>
     </>
   );
