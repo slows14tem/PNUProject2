@@ -6,11 +6,13 @@ services:
       context: ./Data_Analysis/flask
       dockerfile: Dockerfile
     image: upcoderk/flask-app:latest
+
   # react:
   #   build:
   #     context: ./frontend
   #     dockerfile: Dockerfile
   #   image: upcoderk/react-app:latest
+  
   spring-boot:
     build:
       context: ./backend/leadtime
