@@ -6,7 +6,7 @@ on:
     branches: [ "master" ]
     
 permissions:
-  contents: execute
+  contents: read
   
 jobs:
   deploy:
