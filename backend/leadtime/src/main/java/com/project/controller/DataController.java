@@ -68,6 +68,7 @@ public class DataController {
 		dataService.delBasket(idNum);
 	}
 	
+	//payment 정보 저장
 	@PostMapping("/data/addPayment")
 	public void addPayment(@RequestBody int[] idNum, PaymentDto.Request dto) {
 		dataService.addPayment(idNum, dto);
