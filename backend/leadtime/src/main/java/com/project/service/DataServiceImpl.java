@@ -91,7 +91,7 @@ public class DataServiceImpl implements DataService{
 		String jsonString = objectMapper.writeValueAsString(json);
 		System.out.println(jsonString);
 		//플라스크로 요청 보내기
-		String url = "http://10.125.121.177:5000/data/predictAll";
+		String url = "http://3.35.179.46:5000/data/predictAll";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(jsonString, headers);
