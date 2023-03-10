@@ -1,7 +1,6 @@
 import "./View1.css";
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from 'react-redux';
-
 import { getSearchResults, addBasket } from "../../API/funcAPI";
 import { Paging } from "../../Component/Paging/Paging";
 import jwtDecode from "jwt-decode";

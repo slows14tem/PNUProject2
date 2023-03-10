@@ -39,7 +39,7 @@ export const signup = async (requestBody) => {
   }
 }
 
-//login - return yes(리덕스 저장 필요없음)
+//login
 export const login = async (requestBody) => {
   try {
     const { data } = await NotAuthInstance.post(
@@ -52,7 +52,7 @@ export const login = async (requestBody) => {
   }
 }
 
-// 목록 한번에 출력 - return yes(redux로 대체)
+// 목록 한번에 출력(사용안됨)
 export const getSelectList = async () => {
   try{
     const {data}  = await authInstance.get(
@@ -64,7 +64,7 @@ export const getSelectList = async () => {
   }
 }
 
-//login - return yes(입력마다 출력이 달라지기 때문에 리덕스 저장 불가)
+//검색한 리스트 호출
 export const getSearchResults = async (requestBody) => {
   try {
     const { data } = await authInstance.post(
@@ -77,7 +77,7 @@ export const getSearchResults = async (requestBody) => {
   }
 }
 
-//login - return no
+//장바구니 추가
 export const addBasket = async (requestBody) => {
   try {
     const { data } = await authInstance.post(
@@ -90,7 +90,7 @@ export const addBasket = async (requestBody) => {
   }
 }
 
-//login - return yes(일단 장바구니 전체 호출)
+//아이디별 장바구니 호출
 export const getBasket = async () => {
   try{
     const {data}  = await authInstance.get(
@@ -102,7 +102,7 @@ export const getBasket = async () => {
   }
 }
 
-//Basket 삭제 - return no
+//장바구니 삭제
 export const delBasket = async (requestBody) => {
   try{
     const {data}  = await authInstance.post(
@@ -143,6 +143,7 @@ export const prediction = async (requestBody) => {
   }
 }
 
+//장바구니 목록의 리드타임 전체 예측
 export const predictAll = async (requestBody) => {
   try{
     const {data}  = await flaskInstance.post(

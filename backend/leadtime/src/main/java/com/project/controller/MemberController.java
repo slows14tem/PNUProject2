@@ -14,8 +14,9 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/member")
+@RequestMapping("/data/member")
 public class MemberController {
+	//member정보 확인용 API(현재 사용 안됨)
     private final MemberService memberService;
 
     @GetMapping("/me")

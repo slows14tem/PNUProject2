@@ -1,7 +1,6 @@
 import "./View1.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
 import { getSearchInfoRD } from "../../Component/Store/Store";
 
 //검색 및 검색어 자동완성 기능

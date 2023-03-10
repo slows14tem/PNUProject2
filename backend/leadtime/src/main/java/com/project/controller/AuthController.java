@@ -17,9 +17,9 @@ import com.project.service.AuthService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-//@RequestMapping("/data")
 @RequiredArgsConstructor
 public class AuthController {
+	//회원 인증 관련 API
     private final AuthService authService;
 
     @PostMapping("/data/auth/signup")

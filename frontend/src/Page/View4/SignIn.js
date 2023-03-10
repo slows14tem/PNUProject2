@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, signup } from "../../API/funcAPI";
+import { signup } from "../../API/funcAPI";
 
 function SignIn(){
 

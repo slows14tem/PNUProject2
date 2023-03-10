@@ -31,36 +31,30 @@ import com.project.persistence.ItemsRepository;
 import com.project.persistence.MemberRepository;
 import com.project.persistence.PaymentRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class DataServiceImpl implements DataService{
 	
-	@Autowired
-	private ItemsRepository itemsRepo;
+	private final ItemsRepository itemsRepo;
+	private final BasketRepository basketRepo;
+	private final MemberRepository memberRepo;
+	private final PaymentRepository paymentRepo;
 	
-	@Autowired
-	private BasketRepository basketRepo;
-	
-	@Autowired
-	private MemberRepository memberRepo;
-	
-	@Autowired
-	private PaymentRepository paymentRepo;
-	
+	//검색어 자동완성용 데이터 전체 호출
 	public List<Items> getData(){
 		return itemsRepo.findAll();
 	}
-//	public List<ItemsDto.Response> getData(){
-//		List<Items> items = itemsRepo.findAll();
-//		return items.stream().map(ItemsDto.Response::new).collect(Collectors.toList());
-//	}
 	
+	//검색 키워드와 일치하는 데이터 리스트 호출
 	public List<Items> getResult(String[] search){
+		//String끼리 비교는 equals
 		if (search[0].equals("부품대분류")) return itemsRepo.findByMachineryContaining(search[1]);
 		else if (search[0].equals("부품명")) return itemsRepo.findByItemsContaining(search[1]);
 		else if (search[0].equals("부품번호")) return itemsRepo.findByPart1Containing(search[1]);
 		else return itemsRepo.findByClientsContaining(search[1]);		
 	}
-	//String끼리 비교는 equals 제발 기억하자
 	
 	//itemsDto를 이용해서 저장함
 	public void addItem(@RequestBody ItemsDto.Request items) {
@@ -85,11 +79,11 @@ public class DataServiceImpl implements DataService{
 	public String getBasket(Authentication authentication) throws JsonProcessingException{
 		//플라스크에 요청 보낼 때 body 전처리(list를 string(json)으로 변경)
 		Member member = memberRepo.findById(Long.parseLong(authentication.getName())).get();
-		MemberDto.Response json = new MemberDto.Response(member);
-				
+		MemberDto.Response json = new MemberDto.Response(member);			
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(json);
 		System.out.println(jsonString);
+		
 		//플라스크로 요청 보내기
 		String url = "http://3.35.179.46:5000/data/predictAll";
         HttpHeaders headers = new HttpHeaders();
