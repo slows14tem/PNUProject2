@@ -23,7 +23,10 @@
 - IDE: Spring Tool Suite 4
 - 개발 환경: Spring Boot, Spring Data JPA, Spring Security, io.jsonwebtoken, MySQL, DevTool, Lombok
 
-### 4. 시스템 구성도
+### 4. DB 구조
+![DB구조](https://user-images.githubusercontent.com/106790381/224694770-c49ebcd4-332e-4543-9752-83173bd88982.jpg)
+
+### 5. 시스템 구성도
 ![클래스 다이어그램](https://user-images.githubusercontent.com/106790381/224227198-419f5121-9843-47a0-8c34-d5ba8c7251e6.jpg)
 
 ## 프로젝트 구현 시 나의 역할
