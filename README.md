@@ -14,7 +14,16 @@
 - 날짜를 선택하면 리드타임과 계산되어 현재 발주 가능한 품목을 알려준다.
 ![장바구니](https://user-images.githubusercontent.com/106790381/224226860-ec4a048b-72c8-4634-95fb-6ee37858f524.jpg)
 
-### 3. 시스템 구성도
+### 3. 개발 환경
+#### FrontEnd
+- IDE: VS Code
+- 개발 환경: react, react-router-dom, react-redux, redux-toolkit, axios, react-calander, nivo, react-js-pagination, jwt-decode, moment
+
+#### BackEnd
+- IDE: Spring Tool Suite 4
+- 개발 환경: Spring Boot, Spring Data JPA, Spring Security, io.jsonwebtoken, MySQL, DevTool, Lombok
+
+### 4. 시스템 구성도
 ![클래스 다이어그램](https://user-images.githubusercontent.com/106790381/224227198-419f5121-9843-47a0-8c34-d5ba8c7251e6.jpg)
 
 ## 프로젝트 구현 시 나의 역할
