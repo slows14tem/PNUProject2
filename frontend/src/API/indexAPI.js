@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 //axios 인스턴스 생성
-const BASE_URL = "http://3.37.27.133:8080/data/"
-const BASE_FLASK_URL = "http://3.37.27.133:5000/data/"
+const BASE_URL = "http://3.35.179.46:8080/data/"
+const BASE_FLASK_URL = "http://3.35.179.46:5000/data/"
 
 //비인가 통신
 const axiosAPI = (url, options) => {
@@ -38,7 +38,7 @@ const axiosAuthAPI = (url, options) => {
         try {
           const { data } = await axios({
             method: 'post',
-            url: "http://3.37.27.133:8080/data/auth/reissue",
+            url: "http://3.35.179.46:8080/data/auth/reissue",
             data: { "accessToken": accessToken, "refreshToken": refreshToken },
           });
           console.log(data)

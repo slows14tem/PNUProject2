@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSearchInfoRD } from "../../Component/Store/Store";
 
 //검색 및 검색어 자동완성 기능
-
 function Search() {
 
   let dispatch = useDispatch();
@@ -56,10 +55,6 @@ function Search() {
   //검색어 입력 후 버튼 클릭할때 이벤트
   const searchData = (e) => {
     e.preventDefault();
-    //중복제거 값에서 검색결과만 출력(검색어가 포함된 모든 단어 포함 가능)
-    // setSearchResults(
-    //   options.filter((option) => option.includes(selectedOption))
-    // );
     const output = [];
     output.push(selected); //검색조건
     output.push(selectedOption);  //검색어

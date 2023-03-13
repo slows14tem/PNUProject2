@@ -6,8 +6,6 @@ import { Paging } from "../../Component/Paging/Paging";
 import jwtDecode from "jwt-decode";
 
 //리스트 출력, 과거데이터 출력, 장바구니 저장
-//페이징 기능 필요
-
 function SelectedList() {
 
   let { SearchInfo } = useSelector((state) => { return state })
@@ -27,7 +25,6 @@ function SelectedList() {
     return parseInt(price.toFixed(0)).toLocaleString();
   }, []);
 
-  //검색조건이 포함된 리스트 호출(통신 호출할지 redux로 필터링 할지 결정못함)
   useEffect(() => {
     //context값(lead)가 빈값이 아닐때 통신 호출
     if (SearchInfo[0] !== '') {
