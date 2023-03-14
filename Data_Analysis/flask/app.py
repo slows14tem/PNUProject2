@@ -84,19 +84,19 @@ def predictAll():
             i['predictLead'] = int(y_pred[0])
         return params
 
-@app.route('/data/recommendation', methods=['GET', 'POST'])
-def recommend():
-    if request.method == 'POST':
-        db_class = dbModule.Database()
-        sql = "SELECT * FROM ship.raw_data"
-        row      = db_class.executeAll(sql)
-        data = pd.DataFrame(row)
-        params = request.get_json()
-        # 예측값 입력 받기
-        inputItems = params['items']
+# AWS 프리티어 메모리 부족 문제로 현재 기능 사용안함.. 기능의 최적화가 필요해 보임
+# @app.route('/data/recommendation', methods=['GET', 'POST'])
+# def recommend():
+#     if request.method == 'POST':
+#         db_class = dbModule.Database()
+#         sql = "SELECT * FROM ship.raw_data"
+#         row      = db_class.executeAll(sql)
+#         data = pd.DataFrame(row)
+#         params = request.get_json()
+#         # 예측값 입력 받기
+#         inputItems = params['items']
         
-        # return model_recommend.recommend_items(data, inputItems)
-        return recommend_items(data, inputItems)
+#         return recommend_items(data, inputItems)
 
 if __name__ == '__main__':
     app.run(debug=True)
