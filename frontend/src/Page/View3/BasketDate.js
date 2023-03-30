@@ -23,8 +23,6 @@ function BasketDate() {
     return parseInt(price.toFixed(0)).toLocaleString();
   }, []);
 
-  //현재 조금 이상한 구조. 스프링부트에서 장바구니를 받아와서 그 데이터를 다시 플라스크로 보내서 리드타임 예측해옴
-  //좀더 효율적으로 변경할 필요 있음
   useEffect(() => {
     setData(Basket)
     setCategory(Basket.map((i) => i.items.category));
@@ -50,26 +48,6 @@ function BasketDate() {
       setCheckItems(checkItems.filter((el) => el !== id));
     }
   };
-
-  const handleAllCheck = (checked) => {
-    if (checked) {
-      // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-      const idArray = [];
-      data.forEach((el) => idArray.push(el.id));
-      setCheckItems(idArray);
-    }
-    else {
-      // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
-      setCheckItems([]);
-    }
-  }
-
-  //체크박스 선택한 행 삭제
-  const removeRow = () => {
-    setData(data.filter((item) =>
-      !checkItems.includes(item.id)
-    ))
-  }
 
   useEffect(() => {
     const possible = [];
@@ -115,7 +93,7 @@ function BasketDate() {
   const handleClicktd = (item) => {
     navigate('/view2', { state: item })
   }
-
+  
   return (
     <>
       <div className="View3Main">
@@ -146,7 +124,6 @@ function BasketDate() {
                 {data.filter((item) => kitem.includes(item.items.category))
                   .map((item, index) => (
                     <tr key={index}>
-                      {/* 똑같은 항목이 여러개 들어가면 전부 다 체크되는 상황 */}
                       <td><input type={'checkbox'} onChange={(e) =>{
                         if(ramainTime - item.items.leadtime<=0){
                           return alert("주문 불가능")
@@ -170,7 +147,6 @@ function BasketDate() {
             </table>
             <div className="leadtimeByCategory">
               {/* 각 카테고리별 리드타임중 큰값 출력 */}
-              {/* {kitem} */}
               <div> 총 {(data.filter((item) => kitem.includes(item.items.category))).length}개</div>
               <div>소요 예상일: {Math.max(...data.filter((item) => kitem.includes(item.items.category)).map((i) => i.predictLead))}(일)</div>
             </div>

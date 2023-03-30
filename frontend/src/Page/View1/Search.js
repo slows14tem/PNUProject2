@@ -72,7 +72,6 @@ function Search() {
           ))}
         </select>
         <form className="inputform" onSubmit={searchData}>
-          {/* 입력시 대소문자 구분 필요 - 필요 없이 만들어야 할까? */}
           <input
             className="searchItemInput"
             list="options"

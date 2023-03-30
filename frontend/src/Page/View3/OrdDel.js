@@ -17,7 +17,6 @@ function OrdDel() {
     //장바구니 목록에서 삭제하면 화면 새로고침
     window.location.replace("/view3");
     alert("삭제되었습니다.")
-    // navigate("/view3")
   }
 
   return (

@@ -68,14 +68,6 @@ const Nav = () => {
       <div className='logo'>
         <Link to='/'><img src={img} /></Link>
       </div>
-      {/* <div className='link'>
-      <div><Link to='/view1'>품목검색</Link></div>
-      <div><Link to='/view3'>장바구니</Link></div>
-      관리자 권한이 없으면 출력 안됨
-      {checkAdmin && <div><Link to='/admin'>관리자</Link></div>}
-      토큰이 있으면 로그인 되어있다고 판단하기 때문에 로그인 정보를 출력
-      {checkLogin && <div onClick={onClickLogout}>로그아웃: {decode.sub}</div>}
-      </div> */}
       <div className='personal'>
         <Link to='/view1'><AiOutlineSearch className='navIcon' /></Link>
         <Link to='/view3'><IoCartOutline className='navIcon' /></Link>

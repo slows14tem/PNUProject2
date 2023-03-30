@@ -9,7 +9,7 @@ import './View2.css';
 //과거 데이터 출력 페이지
 //추천 목록 출력
 
-function View2Main(props) {
+function View2Main() {
 
   const location = useLocation();
   let { SelectList } = useSelector((state) => { return state }) //view1에서 검색한 정보

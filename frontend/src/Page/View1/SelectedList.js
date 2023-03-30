@@ -13,13 +13,13 @@ function SelectedList() {
   const [data, setData] = useState(); //통신 데이터 저장
   const [checkItems, setCheckItems] = useState([]); //체크한 아이템 저장
 
-  useEffect(()=>{    
-    try{
-      setDecode(jwtDecode(sessionStorage.getItem('accessToken')))    
-    } catch(error){
+  useEffect(() => {
+    try {
+      setDecode(jwtDecode(sessionStorage.getItem('accessToken')))
+    } catch (error) {
       console.log("토큰 없음", error)
-    }      
-  },[])
+    }
+  }, [])
 
   const fixPrice = useCallback(price => {
     return parseInt(price.toFixed(0)).toLocaleString();
@@ -76,16 +76,13 @@ function SelectedList() {
   const addItemBasket = () => {
     const arr = [];
     //선택한 목록을 배열에 추가
-    // arr.push(data?.filter((item) => checkItems.includes(item.id)).map((i)=>[i.id, parseInt(decode.sub)]));
-    data?.filter((item) => checkItems.includes(item.id)).map((i)=>{arr.push([i.id, parseInt(decode.sub)])});
-    //배열을 db에 저장
+    data?.filter((item) => checkItems.includes(item.id)).map((i) => { arr.push([i.id, parseInt(decode.sub)]) });
 
     (async () => {
       await addBasket(arr)
         .then((res) => res)
     })();
     alert("저장되었습니다.");
-    //예외처리 필요
     window.location.replace("/view3")
   }
 
@@ -130,15 +127,10 @@ function SelectedList() {
           </thead>
           <tbody>
             {currentPosts && data.length > 0 ? currentPosts.map((item, index) => (
-              //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
-              //클릭하면 테이블에서 삭제하는 코드(현재 안씀)
-              // <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
               <tr key={index} >
                 {/* 체크박스 클릭 */}
                 <td><input className="th1" type={'checkbox'} onChange={(e) => handleSingleCheck(e.target.checked, item.id)}
                   checked={checkItems.includes(item.id) ? true : false}></input></td>
-                {/* 클릭하면 과거 데이터로 이동(뒤로가기하면 view1이 리셋되는 현상 해결해야함) */}
-                {/* 한 행 전체를 link로 걸면 체크박스를 클릭해도 과거데이터로 이동해버림 */}
                 <td className="th2">{item.machinery}</td>
                 <td className="th2">{item.items}</td>
                 <td className="th2">{item.part1}</td>

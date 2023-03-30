@@ -35,11 +35,9 @@ function Login() {
         .then((res) => {
           if (res?.accessToken) {
             sessionStorage.setItem('accessToken', res?.accessToken);
-            //현재는 refreshtoken도 localstorage에 저장하지만 보안을 위해서는 cookie에 저장하는 것으로 변경해야 할듯...
             sessionStorage.setItem('refreshToken', res?.refreshToken);
             alert('login success');
-            window.location.replace("/view1") //navigate는 랜더링이 안되서 필요한 정보들이 안떠서 이 명령어를 사용
-            // navigate("/view1")  //로그인 성공하면 view1으로 이동
+            window.location.replace("/view1")
           } else {
             console.log("login false");
             alert('login false');
@@ -52,8 +50,6 @@ function Login() {
   const onClickSignup = () => {
     navigate("/signin")
   }
-
-  //로그아웃 구현--네비게이션 바에서 가능하도록 이동
 
   return (
     <div className="loginView">

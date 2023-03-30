@@ -11,7 +11,6 @@ function Calander() {
     <>
       <div>
         <Calendar className="calendar" locale="en-EN" onChange={onChange} value={value} />
-        {console.log(value)}
       </div>
     </>
   );
